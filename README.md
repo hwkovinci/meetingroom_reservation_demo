@@ -86,7 +86,7 @@ pkg install android-tools -y
 ### 6. Initialize uiautomator2 ⚙️
 
 ```bash
-u2 init
+python -m uiautomator2 init
 ```
 
 ---
