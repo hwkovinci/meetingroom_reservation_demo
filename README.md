@@ -76,7 +76,7 @@ Create a file named automation_script.py:
 nano automation_script.py
 
 Copy the following code into the file:
-'''
+'''python
 import uiautomator2 as u2
 import argparse
 import time
@@ -140,7 +140,7 @@ if __name__ == "__main__":
 Save and exit (Ctrl + X, then Y, then Enter).
 
 2. Make the Script Executable ✅
-'''
+'''shell
 chmod +x automation_script.py
 '''
 3. Run the Script 🏃
