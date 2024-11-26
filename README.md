@@ -76,7 +76,7 @@ Create a file named automation_script.py:
 nano automation_script.py
 
 Copy the following code into the file:
-
+'''
 import uiautomator2 as u2
 import argparse
 import time
@@ -136,13 +136,13 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         sys.exit(1)
-
+'''
 Save and exit (Ctrl + X, then Y, then Enter).
 
 2. Make the Script Executable ✅
-
+'''
 chmod +x automation_script.py
-
+'''
 3. Run the Script 🏃
 
 Provide your credentials and optionally a schedule time:
@@ -154,25 +154,25 @@ Scheduling Automation ⏰
 Using Cron 📅
 
 	1.	Install Cronie:
-
+'''
 pkg install cronie -y
-
+'''
 
 	2.	Start the Cron Service:
-
+'''
 crond
-
+'''
 
 	3.	Edit the Crontab:
-
+'''
 crontab -e
-
+'''
 
 	4.	Add a Cron Job:
 Run the script every day at 8:00 AM:
-
+'''
 0 8 * * * python /data/data/com.termux/files/home/automation_script.py -u your_username -p your_password
-
+'''
 Configuration 🔧
 
 Using a Configuration File 📝
@@ -190,10 +190,10 @@ Update the parse_arguments() function as shown in the code above.
 Environment Variables 🌍
 
 Set environment variables in Termux:
-
+'''
 export MEETING_USERNAME=your_username
 export MEETING_PASSWORD=your_password
-
+'''
 The script will read these variables if no command-line arguments are provided.
 
 Logging 📄
