@@ -66,23 +66,23 @@ export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
 ```
 
 	•	Accept Licenses and Install Packages:
-
+```shell
 sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
 sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64" "emulator"
-
+```
 
 
 c. Create an Android Virtual Device (AVD)
 
 	•	List Available System Images:
-
+```shell
 sdkmanager --list | grep "system-images"
-
+```
 
 	•	Create an AVD:
-
+```shell
 avdmanager create avd -n my_avd -k "system-images;android-30;google_apis;x86_64" --device "pixel"
-
+```
 	•	-n my_avd: Names the AVD as “my_avd”.
 	•	-k: Specifies the system image to use.
 	•	--device "pixel": Uses a predefined device configuration.
@@ -106,20 +106,20 @@ sudo apt-get install -y nodejs npm
 
 
 	•	Install Appium Server:
-
+```shell
 npm install -g appium
-
+```
 
 	•	Install Appium Python Client:
-
+```shell
 pip install Appium-Python-Client
-
+```
 
 
 b. Write the Automation Script
 
 Example Script: automation_script.py
-
+```python
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 import time
@@ -149,7 +149,7 @@ def run_automation():
 
 if __name__ == "__main__":
     run_automation()
-
+```
 Notes:
 	•	Replace "/path/to/your/application.apk" with the actual path to your APK.
 	•	Adjust platformVersion to match your emulator’s Android version.
@@ -167,16 +167,16 @@ We’ll create a Python script that:
 	7.	Closes the emulator.
 
 a. Import Required Modules
-
+```python
 import subprocess
 import os
 import time
 import threading
-
+```
 b. Define Functions for Each Step
 
 i. Start the Emulator
-
+```python
 def start_emulator(avd_name):
     print("Starting the emulator...")
     emulator_path = os.path.expanduser("~/Android/Sdk/emulator/emulator")
@@ -195,48 +195,48 @@ def start_emulator(avd_name):
         else:
             time.sleep(5)
     print("Emulator started.")
-
+```
 ii. Install the APK
-
+```python
 def install_apk(apk_path):
     print("Installing the APK...")
     subprocess.run(["adb", "install", "-r", apk_path])
     print("APK installed.")
-
+```
 iii. Start Appium Server
-
+```python
 def start_appium_server():
     print("Starting Appium server...")
     subprocess.Popen(["appium"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     # Wait for Appium server to start
     time.sleep(5)
     print("Appium server started.")
-
+```
 iv. Run the Automation Script
 
 Assuming your automation script is named automation_script.py.
-
+```python
 def run_automation_script():
     print("Running automation script...")
     subprocess.run(["python", "automation_script.py"])
     print("Automation script completed.")
-
+```
 v. Stop Appium Server
-
+```python
 def stop_appium_server():
     print("Stopping Appium server...")
     subprocess.run(["pkill", "-f", "appium"])
     print("Appium server stopped.")
-
+```
 vi. Close the Emulator
-
+```python
 def close_emulator():
     print("Closing the emulator...")
     subprocess.run(["adb", "emu", "kill"])
     print("Emulator closed.")
-
+```
 c. Main Workflow Function
-
+```python
 def main():
     avd_name = "my_avd"
     apk_path = "/path/to/your/application.apk"  # Replace with your APK path
@@ -250,11 +250,11 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 4. Full Python Script
 
 Filename: automation_workflow.py
-
+```python
 import subprocess
 import os
 import time
@@ -319,14 +319,14 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 5. Running the Workflow
 
 	•	Ensure all paths are correct in automation_workflow.py and automation_script.py.
 	•	Set executable permissions (if on Unix-like OS):
-
+```shell
 chmod +x automation_workflow.py automation_script.py
-
+```
 
 	•	Run the workflow script:
 
@@ -361,12 +361,12 @@ Additional Considerations
 	•	Use emulator.exe and adb.exe from the Android SDK.
 	•	Use of pkill:
 	•	On Windows, use taskkill to stop processes.
-
+```python
 def stop_appium_server():
     print("Stopping Appium server...")
     subprocess.run(["taskkill", "/F", "/IM", "node.exe"])
     print("Appium server stopped.")
-
+```
 Enhancements
 
 1. Use Threading for Parallel Processes
@@ -384,7 +384,7 @@ Enhancements
 Complete Workflow with Error Handling and Logging
 
 Here’s an enhanced version of automation_workflow.py with logging and error handling:
-
+```python
 import subprocess
 import os
 import time
@@ -482,7 +482,7 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 Conclusion
 
 By following these steps, you can automate the process of starting an Android emulator, installing an APK, running an automation script, and closing the emulator, all from a Python script using subprocess. This approach allows you to run your automation tests without the need for a physical device and automate the entire workflow.
