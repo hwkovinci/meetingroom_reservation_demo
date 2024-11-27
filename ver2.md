@@ -50,18 +50,20 @@ b. Install Android SDK Command-Line Tools
 	•	Install SDK Tools:
 
 # Create a directory for Android SDK
+```shell
 mkdir -p ~/Android/Sdk/cmdline-tools/latest
-
+```
 # Extract the downloaded zip file
+```shell
 unzip commandlinetools-*.zip -d ~/Android/Sdk/cmdline-tools/latest
-
+```
 
 	•	Set Environment Variables:
-
+```shell
 export ANDROID_SDK_ROOT=~/Android/Sdk
 export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
 export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
-
+```
 
 	•	Accept Licenses and Install Packages:
 
