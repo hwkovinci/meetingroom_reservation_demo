@@ -6,7 +6,7 @@ Certainly! Let’s design your automation project to:
 Project Structure
 
 Here’s the proposed project structure:
-
+```shell
 automation_project/
 ├── scripts/
 │   ├── __init__.py
@@ -19,6 +19,7 @@ automation_project/
 ├── workflow.sh
 ├── requirements.txt
 └── README.md
+```
 
 Explanation
 
@@ -40,7 +41,7 @@ Each Python module will:
 a. scripts/emulator.py
 
 Purpose: Start and stop the Android emulator.
-
+```python
 #!/usr/bin/env python3
 
 import argparse
@@ -97,11 +98,11 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 b. scripts/apk_installer.py
 
 Purpose: Install an APK onto the emulator.
-
+```python
 #!/usr/bin/env python3
 
 import argparse
@@ -127,11 +128,11 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 c. scripts/appium_server.py
 
 Purpose: Start and stop the Appium server.
-
+```python
 #!/usr/bin/env python3
 
 import argparse
@@ -183,11 +184,11 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 d. scripts/automation_runner.py
 
 Purpose: Run the automation script.
-
+```python
 #!/usr/bin/env python3
 
 import argparse
@@ -214,11 +215,11 @@ def main():
 
 if __name__ == "__main__":
     main()
-
+```
 2. Create the Automation Script in automation/automation_script.py
 
 Purpose: Perform UI automation using Appium, utilizing argparse.
-
+```python
 #!/usr/bin/env python3
 
 import argparse
@@ -262,11 +263,11 @@ def run_automation(args):
 if __name__ == "__main__":
     args = parse_arguments()
     run_automation(args)
-
+```
 3. Create a Concise and Flexible Shell Script workflow.sh
 
 Purpose: Orchestrate the workflow by calling the Python scripts, passing arguments as needed.
-
+```shell
 #!/bin/bash
 
 # Configuration
@@ -291,37 +292,37 @@ python scripts/appium_server.py stop
 
 # Close Emulator
 python scripts/emulator.py close
-
+```
 Usage:
-
+```shell
 ./workflow.sh --username your_username --password your_password --app-package com.example.app --app-activity .MainActivity
-
+```
 	•	The "$@" in automation_runner.py ensures that all additional arguments are passed to the automation script.
 
 4. Update requirements.txt
 
 List all Python dependencies:
-
+```txt
 appium-python-client==2.7.1
-
+```
 Install dependencies with:
-
+```shell
 pip install -r requirements.txt
-
+```
 5. Make All Scripts Executable
 
 Ensure that all scripts have executable permissions:
-
+```shell
 chmod +x scripts/*.py
 chmod +x automation/automation_script.py
 chmod +x workflow.sh
-
+```
 6. Running the Workflow
 
 Execute the main workflow script, passing necessary arguments to the automation script:
-
+```shell
 ./workflow.sh --username your_username --password your_password --app-package com.example.app --app-activity .MainActivity
-
+```
 Explanation of the Design
 
 	•	Modular Python Scripts:
@@ -358,7 +359,7 @@ Error Handling and Logging
 Add error handling and logging to the Python scripts.
 
 Example in scripts/emulator.py:
-
+```python
 import logging
 
 # Configure logging
@@ -371,7 +372,7 @@ def start_emulator(avd_name):
     except Exception as e:
         logging.error(f"Failed to start emulator: {e}")
         sys.exit(1)
-
+```
 Repeat similar patterns in other scripts.
 
 Use Configuration Files
@@ -379,11 +380,11 @@ Use Configuration Files
 Parameters like AVD_NAME and APK_PATH can be moved to a configuration file.
 
 Create config.ini
-
+```text
 [DEFAULT]
 avd_name = my_avd
 apk_path = /path/to/your/application.apk
-
+```
 Modify workflow.sh
 
 #!/bin/bash
