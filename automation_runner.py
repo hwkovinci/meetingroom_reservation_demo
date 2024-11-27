@@ -3,8 +3,9 @@
 import argparse
 import subprocess
 import sys
+from typing import List, NoReturn
 
-def run_automation_script(script_path, script_args):
+def run_automation_script(script_path : str, script_args : List[str] ) -> None :
     print(f"Running automation script '{script_path}'...")
     command = ["python", script_path] + script_args
     result = subprocess.run(command)
@@ -14,7 +15,7 @@ def run_automation_script(script_path, script_args):
         print("Automation script failed.")
         sys.exit(result.returncode)
 
-def main():
+def main() -> NoReturn :
     parser = argparse.ArgumentParser(description="Run the automation script.")
     parser.add_argument('--script-path', required=True, help='Path to the automation script')
     parser.add_argument('script_args', nargs=argparse.REMAINDER, help='Arguments for the automation script')
