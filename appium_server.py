@@ -5,8 +5,9 @@ import subprocess
 import sys
 import time
 import os
+from typing import NoReturn
 
-def start_appium():
+def start_appium() -> None :
     print("Starting Appium server...")
     appium_process = subprocess.Popen(["appium"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     # Wait for Appium server to start
@@ -15,7 +16,7 @@ def start_appium():
         f.write(str(appium_process.pid))
     print(f"Appium server started with PID {appium_process.pid}.")
 
-def stop_appium():
+def stop_appium() -> None :
     if os.path.exists("appium.pid"):
         with open("appium.pid", "r") as f:
             pid = f.read()
@@ -27,7 +28,7 @@ def stop_appium():
         print("Appium PID file not found.")
         sys.exit(1)
 
-def main():
+def main() -> None :
     parser = argparse.ArgumentParser(description="Manage Appium Server.")
     subparsers = parser.add_subparsers(dest='command', help='Commands')
 
