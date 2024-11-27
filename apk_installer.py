@@ -3,8 +3,9 @@
 import argparse
 import subprocess
 import sys
+from typing import NoReturn 
 
-def install_apk(apk_path):
+def install_apk(apk_path : str) -> None :
     print(f"Installing APK '{apk_path}'...")
     result = subprocess.run(["adb", "install", "-r", apk_path], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if "Success" in result.stdout:
@@ -14,7 +15,7 @@ def install_apk(apk_path):
         print(result.stdout)
         sys.exit(1)
 
-def main():
+def main() -> None :
     parser = argparse.ArgumentParser(description="Install APK on Android Emulator.")
     parser.add_argument('--apk-path', required=True, help='Path to the APK file to install')
 
