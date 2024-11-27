@@ -4,8 +4,9 @@ import argparse
 import time
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
+rom argparse import Namespace
 
-def parse_arguments():
+def parse_arguments() -> Namespace :
     parser = argparse.ArgumentParser(description='Automation script for the Android app.')
     parser.add_argument('--username', type=str, required=True, help='Username for login')
     parser.add_argument('--password', type=str, required=True, help='Password for login')
@@ -15,7 +16,7 @@ def parse_arguments():
     parser.add_argument('--app-activity', type=str, required=True, help='App activity name')
     return parser.parse_args()
 
-def run_automation(args):
+def run_automation(args : Namespace) -> None:
     desired_caps = {
         "platformName": "Android",
         "platformVersion": args.platform_version,
