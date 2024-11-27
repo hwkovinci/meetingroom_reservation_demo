@@ -11,7 +11,7 @@ We will:
 Project Structure
 
 Here’s the proposed project structure:
-
+```shell
 automation_project/
 ├── scripts/
 │   ├── start_emulator.sh
@@ -26,7 +26,7 @@ automation_project/
 ├── workflow.sh
 ├── requirements.txt
 └── README.md
-
+```
 Explanation
 
 	•	scripts/: Contains shell scripts for each step in the workflow.
@@ -41,7 +41,7 @@ Step-by-Step Guide
 1. Create Shell Scripts for Each Workflow Step
 
 a. start_emulator.sh
-
+```shell
 #!/bin/bash
 
 AVD_NAME=$1
@@ -57,7 +57,7 @@ while [[ $BOOT_COMPLETE != "1" ]]; do
     sleep 5
 done
 echo "Emulator started."
-
+```
 Usage:
 
 ./scripts/start_emulator.sh my_avd
