@@ -386,7 +386,7 @@ avd_name = my_avd
 apk_path = /path/to/your/application.apk
 ```
 Modify workflow.sh
-
+```shell
 #!/bin/bash
 
 # Load configuration
@@ -395,7 +395,7 @@ AVD_NAME=$(awk -F' = ' '/avd_name/ {print $2}' "$CONFIG_FILE")
 APK_PATH=$(awk -F' = ' '/apk_path/ {print $2}' "$CONFIG_FILE")
 
 # Rest of the script...
-
+```
 Final Thoughts
 
 This approach provides:
