@@ -5,8 +5,9 @@ import subprocess
 import time
 import os
 import sys
+from typing import Optional
 
-def start_emulator(avd_name):
+def start_emulator(avd_name: str) -> None:
     print(f"Starting emulator '{avd_name}'...")
     emulator_path = os.path.expanduser("~/Android/Sdk/emulator/emulator")
     process = subprocess.Popen([emulator_path, "-avd", avd_name, "-no-snapshot-load"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -26,12 +27,12 @@ def start_emulator(avd_name):
             time.sleep(5)
     print("Emulator started.")
 
-def close_emulator():
+def close_emulator() -> None:
     print("Closing emulator...")
     subprocess.run(["adb", "emu", "kill"])
     print("Emulator closed.")
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Manage Android Emulator.")
     subparsers = parser.add_subparsers(dest='command', help='Commands')
 
