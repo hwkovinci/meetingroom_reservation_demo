@@ -5,7 +5,7 @@ import subprocess
 import time
 import os
 import sys
-from typing import Optional
+from typing import NoReturn
 from argparse import Namespace
 import shutil
 from pathlib import Path
@@ -38,7 +38,7 @@ def close_emulator() -> None:
     subprocess.run(["adb", "emu", "kill"])
     print("Emulator closed.")
 
-def main() -> None:
+def main() -> NoReturn:
     parser = argparse.ArgumentParser(description="Manage Android Emulator.")
     subparsers = parser.add_subparsers(dest='command', help='Commands')
 
