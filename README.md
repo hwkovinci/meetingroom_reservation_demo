@@ -1,7 +1,6 @@
-# 📱 Android UI Automation Project with Python and Termux 🚀
+#📱 Android UI Automation Project with Python and Appium 🚀
 
-Welcome to the **Android UI Automation Project**! This project allows you to automate interactions with an Android application directly from your device using Python 🐍 and Termux 📲. Follow this guide to set up and run your automation script with ease.
-
+Welcome to the **Android UI Automation Project**! This project allows you to automate interactions with an Android application using Python 🐍 and Appium 🤖. You’ll run your automation scripts on a desktop environment using an Android Virtual Device (AVD) emulator.
 ---
 
 ## Table of Contents 📖
@@ -9,6 +8,18 @@ Welcome to the **Android UI Automation Project**! This project allows you to aut
 - [Introduction 🌟](#introduction-)
 - [Features ✨](#features-)
 - [Prerequisites 📋](#prerequisites-)
+- [System Setup Guidelines🛠️](#system-setup-guidelines-)
+- [Install Java Development Kit (JDK) ☕](#install-java-development-kit-JDK-) Install Java Development Kit (JDK) ☕
+	•	2. Install Android SDK 📲
+	•	3. Create an Android Virtual Device (AVD) 📱
+	•	4. Install Appium and Dependencies 🤖
+	•	Project Structure 📂
+	•	Usage 🚴
+	•	Additional Information ℹ️
+	•	Contributing 🤝
+	•	License 📄
+
+
 - [Installation 🛠️](#installation-)
 - [Usage 🚴](#usage-)
 - [Scheduling Automation ⏰](#scheduling-automation-)
