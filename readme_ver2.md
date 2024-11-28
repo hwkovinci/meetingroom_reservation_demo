@@ -46,7 +46,7 @@ This project automates Android application interactions by:
 
 ### Install Java Development Kit (JDK) ☕
 
-**For Windows**:
+#### **For Windows**:
 1. Download JDK:
 - Visit Oracle JDK Downloads or OpenJDK.
 2. Install JDK:
@@ -64,46 +64,40 @@ This project automates Android application interactions by:
 - Add %JAVA_HOME%\bin to the list.
 - Click OK.
 
-**For macOS**:
+#### **For macOS**:
 1. Download and Install JDK:
 2. Set JAVA_HOME Environment Variable:
-3. a
-4.
-5.
-6. 			Download and Install JDK:
-	•	Visit Oracle JDK Downloads.
-	•	Download the macOS installer and run it.
-	2.	Set JAVA_HOME Environment Variable:
-	•	Open Terminal.
-	•	Run:
+3. Download and Install JDK:
+- Visit Oracle JDK Downloads.
+- Download the macOS installer and run it.
+4. Set JAVA_HOME Environment Variable:
+- Open Terminal.
+- Run:
+
 ```shell
 echo 'export JAVA_HOME=$(/usr/libexec/java_home)' >> ~/.bash_profile
 source ~/.bash_profile
 ```
 
-
-**For Linux**:
-	1.	Install OpenJDK:
-	•	Ubuntu/Debian:
+#### **For Linux**:
+1. Install OpenJDK:
+##### Ubuntu/Debian:
 ```shell
 sudo apt update
 sudo apt install -y openjdk-11-jdk
 ```
-
-	•	CentOS/Fedora:
+##### CentOS/Fedora:
 ```shell
 sudo yum install -y java-11-openjdk-devel
 ```
-
-	2.	Set JAVA_HOME Environment Variable:
-	•	Add to ~/.bashrc or ~/.bash_profile:
+2. Set JAVA_HOME Environment Variable:
+- Add to ~/.bashrc or ~/.bash_profile:
 ```shell
 export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
 export PATH=$PATH:$JAVA_HOME/bin
 ```
-
-	•	Reload the profile:
-```
+- Reload the profile:
+```shell
 source ~/.bashrc
 ```
 
@@ -112,83 +106,80 @@ source ~/.bashrc
 
 Note: We’ll install the Command Line Tools instead of the full Android Studio.
 
-For All Platforms:
-	1.	Download Command Line Tools:
-	•	Visit Android Studio Downloads.
-	•	Scroll down to Command line tools only.
-	•	Download the appropriate package for your OS.
-	2.	Install SDK Command Line Tools:
-	•	Extract the Zip File:
-	•	Windows: Use an unzip tool to extract to C:\Android\cmdline-tools.
-	•	macOS/Linux:
+#### For All Platforms:
+1. Download Command Line Tools:
+- Visit Android Studio Downloads.
+- Scroll down to Command line tools only.
+- Download the appropriate package for your OS.
+2. Install SDK Command Line Tools:
+- Extract the Zip File:
+- Windows: Use an unzip tool to extract to C:\Android\cmdline-tools.
+- macOS/Linux:
+
 ```shell
 mkdir -p ~/Android/Sdk/cmdline-tools
 unzip commandlinetools-*.zip -d ~/Android/Sdk/cmdline-tools
 ```
-
-	3.	Set ANDROID_SDK_ROOT Environment Variable:
-	•	Windows:
- 		Variable name: ANDROID_SDK_ROOT
-   		Variable value: C:\Android
-	•	macOS/Linux:
+3. Set ANDROID_SDK_ROOT Environment Variable:
+- Windows:
+##### Variable name: ANDROID_SDK_ROOT
+##### Variable value: C:\Android
+- macOS/Linux:
 ```shell
 echo 'export ANDROID_SDK_ROOT=~/Android/Sdk' >> ~/.bash_profile
 echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> ~/.bash_profile
 echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> ~/.bash_profile
 source ~/.bash_profile
 ```
-
-	4.	Install Required SDK Packages:
-	•	Accept Licenses:
+4. Install Required SDK Packages:
+- Accept Licenses:
 ```shell
 sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
 ```
-
-	•	Install Packages:
+- Install Packages:
 ```shell
 sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64" "emulator"
 ```
 
 ### Create an Android Virtual Device (AVD) 📱
 
-For All Platforms:
-	1.	List Available System Images:
+**For All Platforms**:
+1. List Available System Images:
 ```shell
 sdkmanager --list | grep "system-images"
 ```
 
-	2.	Create an AVD:
+2. Create an AVD:
 ```shell
 avdmanager create avd -n my_avd -k "system-images;android-30;google_apis;x86_64" --device "pixel"
 ```
-	•	-n my_avd: Names the AVD as “my_avd”.
-	•	-k: Specifies the system image to use.
-	•	--device "pixel": Uses a predefined device configuration.
+#### -n my_avd: Names the AVD as “my_avd”.
+#### -k: Specifies the system image to use.
+#### --device "pixel": Uses a predefined device configuration.
 
 ### Install Appium and Dependencies 🤖
 
-For All Platforms:
-	1.	Install Node.js:
-	•	Windows:
-	•	Download the Windows Installer from Node.js Downloads.
-	•	Run the installer.
-	•	macOS:
+**For All Platforms**:
+1. Install Node.js:
+#### Windows:
+- Download the Windows Installer from Node.js Downloads.
+- Run the installer.
+
+#### macOS:
 ```shell
 brew install node
 ```
 
-	•	Linux:
+#### Linux:
 ```shell
 sudo apt update
 sudo apt install -y nodejs npm
 ```
-
-	2.	Install Appium Server:
+2. Install Appium Server:
 ```shell
 npm install -g appium
 ```
-
-	3.	Install Appium Python Client:
+3. Install Appium Python Client:
 ```shell
 pip install Appium-Python-Client
 ```
@@ -210,13 +201,13 @@ automation_project/
 ├── config.ini
 └── README.md
 ```
-	•	scripts/: Contains Python modules for each task.
-	•	automation/: Contains the main automation script.
- 	•	data/: Contains .ini file for Booting an emulator via command-line
-	•	workflow.sh: Shell script to orchestrate the workflow.
-	•	requirements.txt: Python dependencies.
- 	•	config.ini: additionally required variables
-	•	README.md: Project documentation (this file).
+#### scripts/: Contains Python modules for each task.
+#### automation/: Contains the main automation script.
+#### data/: Contains .ini file for Booting an emulator via command-line
+#### workflow.sh: Shell script to orchestrate the workflow.
+#### requirements.txt: Python dependencies.
+#### config.ini: additionally required variables
+#### README.md: Project documentation (this file).
 
 ## Usage 🚴
 
@@ -230,9 +221,8 @@ cd automation_project
 pip install -r requirements.txt
 ```
 3. Configure the Project
-
-	•	Update workflow.sh with the correct paths and configurations.
-	•	Modify automation/automation_script.py to suit your automation needs.
+- Update workflow.sh with the correct paths and configurations.
+- Modify automation/automation_script.py to suit your automation needs.
 
 4. Make Scripts Executable
 ```shell
