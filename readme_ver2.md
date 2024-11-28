@@ -46,7 +46,7 @@ This project automates Android application interactions by:
 
 ### Install Java Development Kit (JDK) ☕
 
-* For Windows:
+**For Windows**:
 1. Download JDK:
 - Visit Oracle JDK Downloads or OpenJDK.
 2. Install JDK:
@@ -64,7 +64,7 @@ This project automates Android application interactions by:
 - Add %JAVA_HOME%\bin to the list.
 - Click OK.
 
-* For macOS:
+**For macOS**:
 1. Download and Install JDK:
 2. Set JAVA_HOME Environment Variable:
 3. a
@@ -82,7 +82,7 @@ source ~/.bash_profile
 ```
 
 
-* For Linux:
+**For Linux**:
 	1.	Install OpenJDK:
 	•	Ubuntu/Debian:
 ```shell
