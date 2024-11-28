@@ -186,7 +186,7 @@ npm install -g appium
 pip install Appium-Python-Client
 ```
 Project Structure 📂
-
+```shell
 automation_project/
 ├── scripts/
 │   ├── __init__.py
@@ -196,14 +196,19 @@ automation_project/
 │   └── automation_runner.py
 ├── automation/
 │   └── automation_script.py
+├── data/
+│   └── quickbootChoice.ini
 ├── workflow.sh
 ├── requirements.txt
+├── config.ini
 └── README.md
-
+```
 	•	scripts/: Contains Python modules for each task.
 	•	automation/: Contains the main automation script.
+ 	•	data/: Contains .ini file for Booting an emulator via command-line
 	•	workflow.sh: Shell script to orchestrate the workflow.
 	•	requirements.txt: Python dependencies.
+ 	•	config.ini: additionally required variables
 	•	README.md: Project documentation (this file).
 
 Usage 🚴
