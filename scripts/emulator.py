@@ -6,11 +6,17 @@ import time
 import os
 import sys
 from typing import Optional
+from argparse import Namespace
+import shutil
+from pathlib import Path
 
-def start_emulator(avd_name: str) -> None:
+def start_emulator( args : Namespace ) -> None:
     print(f"Starting emulator '{avd_name}'...")
-    emulator_path = os.path.expanduser("~/Android/Sdk/emulator/emulator")
-    process = subprocess.Popen([emulator_path, "-avd", avd_name, "-no-snapshot-load"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    shutil.copy2( args.file_copy , os.path.join( args.avd_root, args.avd_name, Path(args.file_copy).name ) )
+
+    
+   
+    process = subprocess.Popen([args.emulator_path, "-avd", args.avd_name, "-no-snapshot-load"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     # Wait for emulator to boot
     boot_completed = False
     while not boot_completed:
@@ -38,7 +44,11 @@ def main() -> None:
 
     # Start emulator
     parser_start = subparsers.add_parser('start', help='Start the emulator')
+    parser_start.add_argument('--avd-root', required=True, help='Root of the AVD to start')
     parser_start.add_argument('--avd-name', required=True, help='Name of the AVD to start')
+    parser_start.add_argument('--file-copy', required=True, help='Name of the File to copy')
+    parser_start.add_argument('--emulator-path', required=True, help='Path of the emulator excecution file')
+    
 
     # Close emulator
     parser_close = subparsers.add_parser('close', help='Close the emulator')
@@ -46,7 +56,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.command == 'start':
-        start_emulator(args.avd_name)
+        start_emulator(args)
     elif args.command == 'close':
         close_emulator()
     else:
