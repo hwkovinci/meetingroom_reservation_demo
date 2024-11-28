@@ -1,12 +1,12 @@
-#📱 Android UI Automation Project with Python and Appium 🚀
+# 📱 Android UI Automation Project with Python and Appium 🚀
 
 Welcome to the **Android UI Automation Project**! This project allows you to automate interactions with an Android application using Python 🐍 and Appium 🤖. You’ll run your automation scripts on a desktop environment using an Android Virtual Device (AVD) emulator.
 
 --
 
-##Table of Contents 📖
+## Table of Contents 📖
 
-- [Introduction 🌟](#introduction-)Introduction
+- [Introduction 🌟](#introduction-)
 - [Features ✨](#Features-)
 - [Prerequisites 📋](#Prerequisites-)
 - [System Setup Guidelines 🛠️](#System-Setup-Guidelines-)
@@ -21,7 +21,7 @@ Welcome to the **Android UI Automation Project**! This project allows you to aut
 - [License 📄](#License-)
 
 	
-##Introduction 🌟
+## Introduction 🌟
 
 This project automates Android application interactions by:
 - Running automation scripts on a desktop using an Android emulator.
@@ -29,22 +29,22 @@ This project automates Android application interactions by:
 - Executing automation scripts using Appium.
 - Automating the entire workflow with shell scripts and Python scripts.
 
-##Features ✨
+## Features ✨
 - Cross-Platform Support: Works on Windows, macOS, and Linux 🖥️
 - Modular Design: Clean separation between components for maintainability 🛠️
 - Automation with Appium: Utilize Appium for robust UI automation 🤖
 - Scripted Workflow: Shell and Python scripts orchestrate the entire process 📜
 
 
-##Prerequisites 📋
+## Prerequisites 📋
 - Python 3.x installed on your desktop 🐍
 - ode.js installed (for Appium server) 📦
 - Git installed (optional, for cloning the repository) 🌐
 
 
-##System Setup Guidelines 🛠️
+## System Setup Guidelines 🛠️
 
-###Install Java Development Kit (JDK) ☕
+### Install Java Development Kit (JDK) ☕
 
 For Windows:
 	1.	Download JDK:
@@ -103,7 +103,7 @@ source ~/.bashrc
 ```
 
 
-###Install Android SDK 📲
+### Install Android SDK 📲
 
 Note: We’ll install the Command Line Tools instead of the full Android Studio.
 
@@ -144,7 +144,7 @@ sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
 sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64" "emulator"
 ```
 
-###Create an Android Virtual Device (AVD) 📱
+### Create an Android Virtual Device (AVD) 📱
 
 For All Platforms:
 	1.	List Available System Images:
@@ -160,7 +160,7 @@ avdmanager create avd -n my_avd -k "system-images;android-30;google_apis;x86_64"
 	•	-k: Specifies the system image to use.
 	•	--device "pixel": Uses a predefined device configuration.
 
-###Install Appium and Dependencies 🤖
+### Install Appium and Dependencies 🤖
 
 For All Platforms:
 	1.	Install Node.js:
@@ -187,7 +187,7 @@ npm install -g appium
 ```shell
 pip install Appium-Python-Client
 ```
-##Project Structure 📂
+## Project Structure 📂
 ```shell
 automation_project/
 ├── scripts/
@@ -213,7 +213,7 @@ automation_project/
  	•	config.ini: additionally required variables
 	•	README.md: Project documentation (this file).
 
-##Usage 🚴
+## Usage 🚴
 
 1. Clone the Repository
 ```shell
@@ -239,7 +239,7 @@ chmod +x workflow.sh
 ```shell
 ./workflow.sh --username your_username --password your_password --app-package com.example.app --app-activity .MainActivity
 ```
-##Additional Information ℹ️
+## Additional Information ℹ️
 
 - Emulator Performance:
 1. For better performance, ensure your system supports hardware acceleration:
@@ -255,7 +255,7 @@ chmod +x workflow.sh
 1. The automation script uses argparse for command-line arguments.
 2. Customize automation/automation_script.py with your automation steps.
 
-##Contributing 🤝
+## Contributing 🤝
 
 Contributions are welcome! Feel free to open issues or submit pull requests.
 1. Fork the repository 🍴
@@ -265,7 +265,7 @@ Contributions are welcome! Feel free to open issues or submit pull requests.
 5. Open a pull request 📬
 
 
-##License 📄
+## License 📄
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
