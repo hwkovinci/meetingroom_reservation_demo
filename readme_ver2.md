@@ -46,26 +46,31 @@ This project automates Android application interactions by:
 
 ### Install Java Development Kit (JDK) ☕
 
-For Windows:
-	1.	Download JDK:
-	•	Visit Oracle JDK Downloads or OpenJDK.
-	2.	Install JDK:
-	•	Run the installer and follow the instructions.
-	•	By default, JDK is installed in C:\Program Files\Java\jdk-<version>.
-	3.	Set JAVA_HOME Environment Variable:
-	•	Go to Control Panel > System > Advanced system settings.
-	•	Click Environment Variables.
-	•	Under System Variables, click New.
-	•	Variable name: JAVA_HOME
-	•	Variable value: C:\Program Files\Java\jdk-<version>
-	•	Click OK.
-	4.	Update PATH Variable:
-	•	In System Variables, select Path and click Edit.
-	•	Add %JAVA_HOME%\bin to the list.
-	•	Click OK.
+* For Windows:
+1. Download JDK:
+- Visit Oracle JDK Downloads or OpenJDK.
+2. Install JDK:
+- Run the installer and follow the instructions.
+- By default, JDK is installed in C:\Program Files\Java\jdk-<version>.
+3. Set JAVA_HOME Environment Variable:
+- Go to Control Panel > System > Advanced system settings.
+- Click Environment Variables.
+- Under System Variables, click New.
+- Variable name: JAVA_HOME
+- Variable value: C:\Program Files\Java\jdk-<version>
+- Click OK.
+4. Update PATH Variable:
+- In System Variables, select Path and click Edit.
+- Add %JAVA_HOME%\bin to the list.
+- Click OK.
 
-For macOS:
-	1.	Download and Install JDK:
+* For macOS:
+1. Download and Install JDK:
+2. Set JAVA_HOME Environment Variable:
+3. a
+4.
+5.
+6. 			Download and Install JDK:
 	•	Visit Oracle JDK Downloads.
 	•	Download the macOS installer and run it.
 	2.	Set JAVA_HOME Environment Variable:
@@ -77,7 +82,7 @@ source ~/.bash_profile
 ```
 
 
-For Linux:
+* For Linux:
 	1.	Install OpenJDK:
 	•	Ubuntu/Debian:
 ```shell
