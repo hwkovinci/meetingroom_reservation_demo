@@ -68,36 +68,36 @@ For macOS:
 	2.	Set JAVA_HOME Environment Variable:
 	•	Open Terminal.
 	•	Run:
-
+```shell
 echo 'export JAVA_HOME=$(/usr/libexec/java_home)' >> ~/.bash_profile
 source ~/.bash_profile
-
+```
 
 
 For Linux:
 	1.	Install OpenJDK:
 	•	Ubuntu/Debian:
-
+```shell
 sudo apt update
 sudo apt install -y openjdk-11-jdk
-
+```
 
 	•	CentOS/Fedora:
-
+```shell
 sudo yum install -y java-11-openjdk-devel
-
+```
 
 	2.	Set JAVA_HOME Environment Variable:
 	•	Add to ~/.bashrc or ~/.bash_profile:
-
+```shell
 export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
 export PATH=$PATH:$JAVA_HOME/bin
-
+```
 
 	•	Reload the profile:
-
+```
 source ~/.bashrc
-
+```
 
 
 2. Install Android SDK 📲
@@ -113,47 +113,47 @@ For All Platforms:
 	•	Extract the Zip File:
 	•	Windows: Use an unzip tool to extract to C:\Android\cmdline-tools.
 	•	macOS/Linux:
-
+```shell
 mkdir -p ~/Android/Sdk/cmdline-tools
 unzip commandlinetools-*.zip -d ~/Android/Sdk/cmdline-tools
-
+```
 
 	3.	Set ANDROID_SDK_ROOT Environment Variable:
 	•	Windows:
-	•	Variable name: ANDROID_SDK_ROOT
-	•	Variable value: C:\Android
+ 		Variable name: ANDROID_SDK_ROOT
+   		Variable value: C:\Android
 	•	macOS/Linux:
-
+```shell
 echo 'export ANDROID_SDK_ROOT=~/Android/Sdk' >> ~/.bash_profile
 echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> ~/.bash_profile
 echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> ~/.bash_profile
 source ~/.bash_profile
-
+```
 
 	4.	Install Required SDK Packages:
 	•	Accept Licenses:
-
+```shell
 sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
-
+```
 
 	•	Install Packages:
-
+```shell
 sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64" "emulator"
-
+```
 
 
 3. Create an Android Virtual Device (AVD) 📱
 
 For All Platforms:
 	1.	List Available System Images:
-
+```shell
 sdkmanager --list | grep "system-images"
-
+```
 
 	2.	Create an AVD:
-
+```shell
 avdmanager create avd -n my_avd -k "system-images;android-30;google_apis;x86_64" --device "pixel"
-
+```
 	•	-n my_avd: Names the AVD as “my_avd”.
 	•	-k: Specifies the system image to use.
 	•	--device "pixel": Uses a predefined device configuration.
@@ -166,25 +166,25 @@ For All Platforms:
 	•	Download the Windows Installer from Node.js Downloads.
 	•	Run the installer.
 	•	macOS:
-
+```shell
 brew install node
-
+```
 
 	•	Linux:
-
+```shell
 sudo apt update
 sudo apt install -y nodejs npm
-
+```
 
 	2.	Install Appium Server:
-
+```shell
 npm install -g appium
-
+```
 
 	3.	Install Appium Python Client:
-
+```shell
 pip install Appium-Python-Client
-
+```
 Project Structure 📂
 
 automation_project/
@@ -209,29 +209,29 @@ automation_project/
 Usage 🚴
 
 1. Clone the Repository
-
+```shell
 git clone https://github.com/yourusername/automation_project.git
 cd automation_project
-
+```
 2. Install Python Dependencies
-
+```shell
 pip install -r requirements.txt
-
+```
 3. Configure the Project
 
 	•	Update workflow.sh with the correct paths and configurations.
 	•	Modify automation/automation_script.py to suit your automation needs.
 
 4. Make Scripts Executable
-
+```shell
 chmod +x scripts/*.py
 chmod +x automation/automation_script.py
 chmod +x workflow.sh
-
+```
 5. Run the Workflow
-
+```shell
 ./workflow.sh --username your_username --password your_password --app-package com.example.app --app-activity .MainActivity
-
+```
 Additional Information ℹ️
 
 	•	Emulator Performance:
