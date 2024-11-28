@@ -24,10 +24,12 @@ def run_automation(args : Namespace) -> None:
         "deviceName": args.device_name,
         "appPackage": args.app_package,
         "appActivity": args.app_activity,
+        "app" : args.app_path,
         "automationName": "UiAutomator2",
         "noReset": True
     }
-
+#https://github.com/appium/appium-uiautomator2-driver#capabilities
+    
     driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
     time.sleep(5)  # Wait for the app to load
 
