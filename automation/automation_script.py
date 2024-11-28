@@ -4,7 +4,8 @@ import argparse
 import time
 from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
-rom argparse import Namespace
+from argparse import Namespace
+from Typing import Tuple, List
 
 def parse_arguments() -> Namespace :
     parser = argparse.ArgumentParser(description='Automation script for the Android app.')
