@@ -8,9 +8,9 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def run_automation_script(script_path : str, script_kargs : Dict[str, str] ) -> None :
+def run_automation_script(script_path : str, uiactions_path : str ) -> None :
     print(f"Running automation script '{script_path}'...")
-    command = ["python", script_path]
+    command = ["python", script_path, "--config-file", uiactions_path ]
     
 #python automation_script.py --username script_args[0] 
     result = subprocess.run(command)
@@ -23,12 +23,12 @@ def run_automation_script(script_path : str, script_kargs : Dict[str, str] ) -> 
 def main() -> NoReturn :
     parser = argparse.ArgumentParser(description="Run the automation script.")
     parser.add_argument('--script-path', required=True, help='Path to the automation script')
-    parser.add_argument('--script-path', required=True, help='Path to the automation script')
+    parser.add_argument('--uiactions-path', required=True, help='Path to the automation script')
 
     args = parser.parse_args()
 
 
-    run_automation_script(args.script_path, args.script_args)
+    run_automation_script(args.script_path, args.uiactions_path)
 
 if __name__ == "__main__":
     main()
