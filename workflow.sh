@@ -19,7 +19,7 @@ python scripts/apk_installer.py --apk-path "$APK_PATH"
 python scripts/appium_server.py start
 
 # Run Automation Script
-python scripts/automation_runner.py --script-path "$AUTOMATION_SCRIPT" "$@"
+python scripts/automation_runner.py --script-path "$AUTOMATION_SCRIPT"
 
 # Stop Appium Server
 python scripts/appium_server.py stop
