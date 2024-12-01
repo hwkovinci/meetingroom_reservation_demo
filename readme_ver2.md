@@ -138,7 +138,7 @@ sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
 ```
 - Install Packages:
 ```shell
-sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64" "emulator"
+sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-35" "system-images;android-35;google_apis_playstore;x86_64" "emulator"
 ```
 
 ### Create an Android Virtual Device (AVD) 📱
