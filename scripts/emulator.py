@@ -11,8 +11,8 @@ import shutil
 from pathlib import Path
 
 def start_emulator( args : Namespace ) -> None:
-    print(f"Starting emulator '{avd_name}'...")
-    shutil.copy2( args.file_copy , os.path.join( args.avd_root, args.avd_name, Path(args.file_copy).name ) )
+    print(f"Starting emulator '{args.avd_name}'...")
+    shutil.copy2( args.file_copy , os.path.join( args.avd_root, f'{args.avd_name}.avd', Path(args.file_copy).name ) )
 
     
    

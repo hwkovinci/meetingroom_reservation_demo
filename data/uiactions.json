@@ -1,22 +1,12 @@
 [
-                { "appPackage": "com.example.app:id",
-                "appActivity": "username_input",
-                "uiAction":"send_keys" },
-                 { "appPackage": "com.example.app:id",
-                "appActivity": "password_input",
-                 "uiAction":"send_keys" },
-                { "appPackage": "com.example.app:id",
-                "appActivity": "login_button",
-                "uiAction":"click" },
-                { "appPackage": "com.example.app:main",
-                "appActivity": "select_floor",
-                "uiAction":"select" },
-                { "appPackage": "com.example.app:main",
-                "appActivity": "select_roomnum",
-                "uiAction":"select" },
-                { "appPackage": "com.example.app:main",
-                "appActivity": "confirm_button",
-                "uiAction":"click"}
-
+	{"type" : "click",
+		"selector_type" : "id",
+		"selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
+		"target_selector" : "",
+		"start_x" : "",
+		"end_x" : "",
+		"stary_y" : "",
+		"end_y" : ""
+	}
 
                 ]

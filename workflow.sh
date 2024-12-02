@@ -8,21 +8,22 @@ AUTOMATION_SCRIPT=$(awk -F' = ' '/automation_script/ {print $2}' "$CONFIG_FILE")
 AVD_ROOT=$(awk -F' = ' '/avd_root/ {print $2}' "$CONFIG_FILE")
 FILE_COPY=$(awk -F' = ' '/file_copy/ {print $2}' "$CONFIG_FILE")
 EMULATOR_PATH=$(awk -F' = ' '/emulator_path/ {print $2}' "$CONFIG_FILE")
+UIACTIONS_JSON=$(awk -F' = ' '/uiactions_json/ {print $2}' "$CONFIG_FILE")
 
 # Start Emulator
-python scripts/emulator.py start --avd-root "$AVD_ROOT" --avd-name "$AVD_NAME" --file-copy "$FILE_COPY" --emulator-path "$EMULATOR_PATH"   
+python3 scripts/emulator.py start --avd-root "$AVD_ROOT" --avd-name "$AVD_NAME" --file-copy "$FILE_COPY" --emulator-path "$EMULATOR_PATH"   
 
 # Install APK
-python scripts/apk_installer.py --apk-path "$APK_PATH"
+python3 scripts/apk_installer.py --apk-path "$APK_PATH"
 
 # Start Appium Server
-python scripts/appium_server.py start
+python3 scripts/appium_server.py start
 
 # Run Automation Script
-python scripts/automation_runner.py --script-path "$AUTOMATION_SCRIPT"
+python3 scripts/automation_runner.py --script-path "$AUTOMATION_SCRIPT" --config-file "$UIACTIONS_JSON"
 
 # Stop Appium Server
-python scripts/appium_server.py stop
+python3 scripts/appium_server.py stop
 
 # Close Emulator
-python scripts/emulator.py close
+python3 scripts/emulator.py close

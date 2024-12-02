@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-import os
 import argparse
 import subprocess
 import sys
 from typing import List, Dict, NoReturn
-from dotenv import load_dotenv 
 
 load_dotenv()
 
