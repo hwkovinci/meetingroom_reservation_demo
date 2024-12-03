@@ -13,7 +13,7 @@ load_dotenv()
 
 def parse_arguments() -> Namespace :
     parser = argparse.ArgumentParser(description='Automation script for the Android app.')
-    parser.add_argument('--config-file', type=str, required=True, help='Path to the JSON configuration file')   
+    parser.add_argument('--config-file', type=str, required=True, help='Path to the JSON configuration file')
     return parser.parse_args()
 
 def load_config(file_path: str) -> List[Dict]:
@@ -33,17 +33,19 @@ def run_automation(args : Namespace) -> None:
         "automationName": "UiAutomator2",
         "noReset": True
     }
-#https://github.com/appium/appium-uiautomator2-driver#capabilities
-    
+
+
     driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
     time.sleep(5)  # Wait for the app to load
+
+
 
     ui_actions = UIAction(driver)
     actions = load_config(args.config_file)
 
     # Iterate through each action in the JSON configuration
     for action in actions:
-        ui_actions.perform_action(action)
+        ui_actions.action_wrapper(action)
 
 
     driver.quit()
