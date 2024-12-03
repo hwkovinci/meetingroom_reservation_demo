@@ -79,10 +79,9 @@ def run_automation(args : Namespace) -> None:
                         {})}
     options = AppiumOptions()
     options.load_capabilities( desired_caps )
-
-    driver = webdriver.Remote("http://127.0.0.1:5037/wd/hub", options=options)
+    url = f'http://{os.getenv("ADRESS")}:{os.getenv("PORT")}/wd/hub'
+    driver = webdriver.Remote( url , options=options)
     time.sleep(5)  # Wait for the app to load
-
 
 
     ui_actions = UIAction(driver)
