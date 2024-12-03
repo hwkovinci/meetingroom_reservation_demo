@@ -4,11 +4,10 @@ import subprocess
 import sys
 from typing import List, Dict, NoReturn
 
-load_dotenv()
 
 def run_automation_script(script_path : str, uiactions_path : str ) -> None :
     print(f"Running automation script '{script_path}'...")
-    command = ["python", script_path, "--config-file", uiactions_path ]
+    command = ["python3", script_path, "--config-file", uiactions_path ]
     
 #python automation_script.py --username script_args[0] 
     result = subprocess.run(command)
