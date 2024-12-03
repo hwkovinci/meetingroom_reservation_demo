@@ -20,6 +20,17 @@ def load_config(file_path: str) -> List[Dict]:
     with open(file_path, 'r') as file:
         return json.load(file)
 
+def apply_userinput( actions : List[Dict],
+                    user_input : Dict[int , Tuple[Dict[str, str],Dict[str, str] ] ) -> List[Dict] :
+    for index in user_input.keys() :
+        for sub_index in range(0, 2) :
+            if len  user_input[index][sub_index].keys() :
+                actions[index][ user_input[index][sub_index]["target"]] = user_input[index][sub_index]['value']
+
+
+
+
+
 def run_automation(args : Namespace) -> None:
 
 
@@ -34,7 +45,18 @@ def run_automation(args : Namespace) -> None:
         "noReset": True
     }
 
+    user_input = {
+            1 : ({
+                'target' : 'text',
+                'value' : os.getnv('user_id')
+                },
+                 {})
+            3 : ({},{})
 
+
+
+
+            }
     driver = webdriver.Remote("http://localhost:4723/wd/hub", desired_caps)
     time.sleep(5)  # Wait for the app to load
 
@@ -42,6 +64,10 @@ def run_automation(args : Namespace) -> None:
 
     ui_actions = UIAction(driver)
     actions = load_config(args.config_file)
+
+
+    actions = apply_userinput( actions, user_input )
+
 
     # Iterate through each action in the JSON configuration
     for action in actions:
