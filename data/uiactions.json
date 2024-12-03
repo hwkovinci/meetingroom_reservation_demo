@@ -1,12 +1,81 @@
 [
-	{"type" : "click",
-		"selector_type" : "id",
-		"selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
-		"target_selector" : "",
-		"start_x" : "",
-		"end_x" : "",
-		"stary_y" : "",
-		"end_y" : ""
-	}
+        {"type" : "click",
+                "selector_type" : "id",
+                "selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
+                "target_selector" : "",
+                "start_x" : "",
+                "end_x" : "",
+                "stary_y" : "",
+                "end_y" : ""
+        },
+        {"type" : "type",
+                "selector_type" : "id",
+                "selector" : "com.google.android.apps.nexuslauncher:id/input",
+                "target_selector" : "",
+                "start_x" : "",
+                "end_x" : "",
+                "stary_y" : "",
+                "end_y" : ""
+        },
+        {"type" : "click",
+                "selector_type" : "id",
+                "selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
+                "target_selector" : "",
+                "start_x" : "",
+                "end_x" : "",
+                "stary_y" : "",
+                "end_y" : ""
+        },
+        {"type" : "click",
+                "selector_type" : "id",
+                "selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
+                "target_selector" : "",
+                "start_x" : "",
+                "end_x" : "",
+                "stary_y" : "",
+                "end_y" : ""
+        },
+        {"type" : "click",
+                "selector_type" : "id",
+                "selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
+                "target_selector" : "",
+                "start_x" : "",
+                "end_x" : "",
+                "stary_y" : "",
+                "end_y" : ""
+        },
+         {"type" : "click",
+                "selector_type" : "id",
+                "selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
+                "attribut_name" : "",
+                "text" : "",
+                "start_x" : "",
+                "end_x" : "",
+                "start_y" : "",
+                "end_y" : "",
+                "subaction" : {}
+        },
+        {"type" : "click",
+                "selector_type" : "id",
+                "selector" : "com.google.android.apps.nexuslauncher:id/search_container_hotseat",
+                "attribut_name" : "",
+                "text" : "",
+                "start_x" : "",
+                "end_x" : "",
+                "start_y" : "",
+                "end_y" : "",
+                "subaction" : {
+                        "type" : "",
+                        "selector_type" : "",
+                        "selector" : "",
+                        "condition" : "",
+                        "attribut_name" : "",
+                        "text" : "",
+                        "max_retry" : ""
+
+
+                }
+        }
+
 
                 ]
