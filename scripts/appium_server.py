@@ -6,10 +6,13 @@ import sys
 import time
 import os
 from typing import NoReturn
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def start_appium() -> None :
     print("Starting Appium server...")
-    appium_process = subprocess.Popen(["appium"], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    appium_process = subprocess.Popen(["appium", "--address", os.getenv("ADRESS"), "--port", os.getenv("PORT")], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     # Wait for Appium server to start
     time.sleep(5)
     with open("appium.pid", "w") as f:
