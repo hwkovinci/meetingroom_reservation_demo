@@ -8,7 +8,7 @@
                 "end_x" : "",
                 "stary_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 0,
                 "subaction" : {}
@@ -22,7 +22,7 @@
                 "end_x" : "",
                 "stary_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 1,
                 "subaction" : {}
@@ -36,7 +36,7 @@
                 "end_x" : "",
                 "stary_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 2,
                 "subaction" : {}
@@ -44,14 +44,14 @@
         },
         {"type" : "click",
                 "selector_type" : "id",
-                "selector" : "com.android.permissioncontroller:id/permission_deny_and_dont_ask_again_button",
+                "selector" : "com.android.permissioncontroller:id/permission_deny_button",
                 "attribute_name" : "",
                 "text" : "",
                 "start_x" : "",
                 "end_x" : "",
                 "stary_y" : "",
                 "end_y" : "",
-                "ignore" : "True",
+                "ignore" : true,
                 "max_retry" : "10",
                 "index" : 3,
                 "subaction" : {}
@@ -66,7 +66,7 @@
                 "end_x" : "",
                 "stary_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 4,
                 "subaction" : {}
@@ -81,7 +81,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 5,
                 "subaction" : {}
@@ -95,7 +95,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 6,
                 "subaction" : {}
@@ -109,7 +109,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 7,
                 "subaction" : {}
@@ -123,7 +123,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 8,
                 "subaction" : {
@@ -147,7 +147,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 9,
                 "subaction" : {}
@@ -161,7 +161,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 10,
                 "subaction" : {}
@@ -173,7 +173,7 @@
                 "text" : "",
                 "xy_xy" : "",
                 "direction" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 6,
                 "subaction" : {
@@ -197,7 +197,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 6,
                 "subaction" : {
@@ -221,7 +221,7 @@
                 "end_x" : "",
                 "start_y" : "",
                 "end_y" : "",
-                "ignore" : "False",
+                "ignore" : false,
                 "max_retry" : "10",
                 "index" : 6,
                 "subaction" : {

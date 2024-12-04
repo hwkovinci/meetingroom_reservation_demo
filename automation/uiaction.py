@@ -47,7 +47,6 @@ class UIAction:
         pass_next = False
         if len(action.get('selector')) > 0 :
             for i in range(0, int( action.get('max_retry') )) :
-                print(i)
                 time.sleep(1)
                 pass_next = self.confirm_ready( action.get('selector'), action.get('selector_type') )
                 if pass_next : break
@@ -57,6 +56,7 @@ class UIAction:
                     else :
                         pass
         if not bool( action.get('ignore') ) :
+            time.sleep(1)
             if len( action.setdefault('subaction', {}).keys() ) > 0 :
                 self.iterate_action( action.get('subaction') , action )
             else  : self.perform_action( action )       
@@ -87,7 +87,7 @@ class UIAction:
         condition = action.get('condition')
         for i in range(0, int( action.get('max_retry') )) :
             self.perform_action( main_action )
-            time.sleep( 0.5 )
+            time.sleep( 1 )
             if condition == 'get_attribute' :
                 attribute_value = self.get_attribute( selector, selector_type, action.get( 'attribute_name' ))
                 meet_condition =  attribute_value is action.get( 'text' )
