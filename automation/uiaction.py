@@ -21,30 +21,38 @@ class UIAction:
     def get_attribute( self, selector: str, selector_type: str, attribute_name : str ) -> str :
         element = self.find_element(se)
         return element.get_attribute( attribute_name )
-
+        
+    def get_xy(self, xy_value : str, direction : str ) ->List[int] :
+            set_value = ''
+            if not len(xy_value) > 0 :  
+                set_value = os.getenv(f'XY_DEFAULT_{direction}')
+            else : 
+                set_value = xy_value
+        return [ int(item) for item in set_value.split(',') ]
 
     def perform_action(self, action : Dict[str, Any]) -> None:
         action_type = action.get('type')
         if action_type == 'click':
             self.click_element(action.get('selector'), action.get('selector_type'))
         elif action_type == 'type':
+            
             self.type_text(action.get('selector'), action.get('text'), action.get('selector_type'))
-#        elif action_type == 'swipe':
-#            self.swipe(action['start_x'], action['start_y'], action['end_x'], action['end_y'])
-#        elif action_type == 'date_swipe':
-#            self.check_date_and_swipe(action.get('selector'), datetime.strptime(action.get('target_date'), "%Y-%m-%d"))
+        elif action_type == 'swipe':
+            list_nums = self.get_xy( action['xy_xy'], action['direction'] )
+            self.driver.swipe(*list_nums, duration = 500 )
 
 
     def action_wrapper( self, action : Dict[str, Any] ) -> None :
         pass_next = False
-        for i in range(0, int( action.get('max_retry') )) :
-            pass_next = self.confirm_ready( action.get('selector'), action.get('selector_type') )
-            if pass_next : break
-            if i == (int( action.get('max_retry') ) -1 ) : 
-                if not bool( action.get('ignore') ) :
-                    raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
-                else :
-                    pass
+        if len(action.get('selector')) > 0 :
+            for i in range(0, int( action.get('max_retry') )) :
+                pass_next = self.confirm_ready( action.get('selector'), action.get('selector_type') )
+                if pass_next : break
+                if i == (int( action.get('max_retry') ) -1 ) : 
+                    if not bool( action.get('ignore') ) :
+                        raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
+                    else :
+                        pass
         if len( action.get['subaction'].keys() ) > 0 :
             self.iterate_action( action.get('subaction') , action )
         else  : self.perform_action( action )        
@@ -59,7 +67,7 @@ class UIAction:
         element.send_keys(text)
 
 
-    def find_element( self, selector : str, selector_type: str ) -> Any:
+    def find_element( self, selector : str, selector_type : str ) -> Any:
         if selector_type == 'id':
             return self.driver.find_element( AppiumBy.ID, selector)
         elif selector_type == 'xpath' :
