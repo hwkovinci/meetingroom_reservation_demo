@@ -5,14 +5,10 @@ from appium import webdriver
 from appium.webdriver.webdriver import AppiumOptions
 from appium.webdriver.common.appiumby import AppiumBy
 from argparse import Namespace
-from typing import Dict, List, Tuple
-from dotenv import load_dotenv
-import os
 from uiaction import UIAction
 from parseutil import load_config, apply_userinput 
 from userinput import load_variables, load_connection
 
-load_dotenv()
 
 def parse_arguments() -> Namespace :
     parser = argparse.ArgumentParser(description='Automation script for the Android app.')
@@ -31,7 +27,6 @@ def run_automation(args : Namespace) -> None:
     time.sleep(5) 
     ui_actions = UIAction(driver)
  
-
     # Iterate through each action in the JSON configuration
     for action in actions:
         ui_actions.action_wrapper(action)
