@@ -8,14 +8,14 @@ load_dotenv()
 def load_variables() -> Dict[int, Tuple[Dict[str, any], Dict[str, any]]] :
     start_time = datetime.strptime( os.getenv('START_TIME') , '%Y.%m.%d %H:%M:%S'  )
     end_time = datetime.strptime( os.getenv('END_TIME') , '%Y.%m.%d %H:%M:%S'  )
-  
-    user_input = { 1 : ({ 'target' : 'text', 'value' : [os.getenv('APP_NAME') ]},
-                        {}),
-              2 : ({ 'target' : 'selector', 'value' : [ os.getenv('APP_NAME') ] },
-                   {}),
-              3 : ( {'target' : 'selector' , 'value' : [datetime.now().strftime("%Y.%m.%d(%a)"), datetime.now().strftime("%H:%M" ), datetime.now().strftime("%H:%M") ] },
+    save_val1, save_val2 = ( {'target' : 'selector' , 'value' : [datetime.now().strftime("%Y.%m.%d(%a)"), datetime.now().strftime("%H:%M" ), datetime.now().strftime("%H:%M") ] },
                    {'target' : 'text' , 'value' : [datetime.now().strftime('%Y.%m.%d(%a)')]  })
-                 }
+    user_input = { 
+        1 : ({ 'target' : 'text', 'value' : [os.getenv('APP_NAME') ]}, {}),
+        2 : ({ 'target' : 'selector', 'value' : [ os.getenv('APP_NAME') ] }, {}),
+        4 : ( { 'target' : 'selector', 'value' : [ os.getenv('USER_ID') ] }, {}),
+        5 : ( { 'target' : 'selector', 'value' : [ os.getenv('USER_PW') ] }, {}),
+                   }
     return user_input
 
 def load_connection() ->  Tuple[str, Dict[str, str]] :
