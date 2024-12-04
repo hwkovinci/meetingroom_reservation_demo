@@ -36,22 +36,18 @@ class UIAction:
 
 
     def action_wrapper( self, action : Dict[str, Any] ) -> None :
-
-        retry_count = 0
-        while retry_count < int(action.get('max_retry')) :
-            self.confirm_ready( action.get()  )
-            retry_count += 1
-        if retry_count == int(action.get('max_retry')) :
-            if not bool( action.get('ignore') ) :
-                raise TimeoutError( f'Action Failed after given amount of retry ; {retry_count}' )
-            else :
-                pass
-        else :
-            if len( action.get['subaction'].keys() ) > 0 :
-                self.iterate_action( action.get('subaction') , action )
-
-            else self.perform_action( action )
-
+        pass_next = False
+        for i in range(0, int( action.get('max_retry') )) :
+            pass_next = self.confirm_ready( action.get('selector'), action.get('selector_type') )
+            if pass_next : break
+            if i == (int( action.get('max_retry') ) -1 ) : 
+                if not bool( action.get('ignore') ) :
+                    raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
+                else :
+                    pass
+        if len( action.get['subaction'].keys() ) > 0 :
+            self.iterate_action( action.get('subaction') , action )
+        else  : self.perform_action( action )        
 
 
     def click_element(self, selector: str, selector_type: str) -> None:
@@ -77,7 +73,7 @@ class UIAction:
         selector_type = action.get('selector_type')
         condition = action.get('condition')
         retry_count = 0
-        while not meet_condition :
+        for i in range(0, int( action.get('max_retry') )) :
             self.perform_action( main_action )
             time.sleep( 0.5 )
             if condition == 'get_attribute' :
@@ -85,9 +81,9 @@ class UIAction:
                 meet_condition =  attribute_value is action.get( 'text' )
             elif condition == 'confirm_ready' :
                 meet_condition = self.confirm_ready( selector, selector_type)
-            retry_count += 1
-        if retry_count == int( action.get('max_retry') ) :
-            raise TimeoutError( f'Action Failed after given amount of retry ; {retry_count}' )
+            if meet_condition : break
+            if i == (int( action.get('max_retry') ) -1 ) :
+                raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
 
 #    def swipe(self, start_x: int, start_y: int, end_x: int, end_y: int) -> None:
 #       TouchAction(self.driver).press(x=start_x, y=start_y).move_to(x=end_x, y=end_y).release().perform()
