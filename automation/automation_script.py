@@ -9,7 +9,8 @@ from typing import Dict, List, Tuple
 from dotenv import load_dotenv
 import os
 from uiaction import UIAction
-import parseutil as pu 
+from parseutil import load_config, apply_userinput 
+from userinput import load_variables, load_connection
 
 load_dotenv()
 
@@ -20,40 +21,16 @@ def parse_arguments() -> Namespace :
 
 
 def run_automation(args : Namespace) -> None:
-    desired_caps = {
-            "appium:DeviceName": "Android",
-            "platformName": "Android",
-            "appium:ensureWebviewsHavePages": True,
-            "appium:nativeWebScreenshot": True,
-            "appium:newCommandTimeout": 3600,
-            "appium:connectHardwareKeyboard": True,
-            "automationName": "UiAutomator2",
-            "noRest" : True }  
-
-
-#    desired_caps = dict( platformName='Android',
-#                    automationName='uiautomator2',
-#                    deviceName='Android',
-#                    appPackage='com.android.settings',
-#                    appActivity='.Settings',
-#                    language='en',
-#                    locale='US')
-
-    user_input = { 1 : ({ 'target' : 'text', 'value' : [os.getenv('APP_NAME') ]},
-                        {})}
+    actions = load_config(args.config_file)
+    actions = apply_userinput( actions, load_variables() )
+    url, desired_caps = load_connection()
     options = AppiumOptions()
     options.load_capabilities( desired_caps )
-    url = f'http://{os.getenv("ADRESS")}:{os.getenv("PORT")}/wd/hub'
     driver = webdriver.Remote( url , options=options)
-    time.sleep(5)  # Wait for the app to load
-
-
+    
+    time.sleep(5) 
     ui_actions = UIAction(driver)
-    actions = load_config(args.config_file)
-
-
-    actions = apply_userinput( actions, user_input )
-
+ 
 
     # Iterate through each action in the JSON configuration
     for action in actions:
