@@ -12,6 +12,11 @@ from pathlib import Path
 
 def start_emulator( args : Namespace ) -> None:
     print(f"Starting emulator '{args.avd_name}'...")
+    subprocess.run(["avdmanager", 
+                                "create","avd", 
+                                "-n", args.avd_name, 
+                                "-k", "system-images;android-35;google_apis_playstore;x86_64", 
+                                "--device", "pixel"])
     shutil.copy2( args.file_copy , os.path.join( args.avd_root, f'{args.avd_name}.avd', Path(args.file_copy).name ) )
 
     
@@ -36,6 +41,9 @@ def start_emulator( args : Namespace ) -> None:
 def close_emulator() -> None:
     print("Closing emulator...")
     subprocess.run(["adb", "emu", "kill"])
+    subprocess.run(["avdmanager",
+                                "delete","avd",
+                                "-n", args.avd_name])
     print("Emulator closed.")
 
 def main() -> NoReturn:

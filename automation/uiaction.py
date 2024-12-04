@@ -2,8 +2,9 @@ from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 #from appium.webdriver.common.touch_action import TouchAction
 from datetime import datetime, timedelta
-from typing import Dict, Any
+from typing import Dict, List, Any
 import time
+import logging
 
 
 class UIAction:
@@ -15,7 +16,7 @@ class UIAction:
             element = self.find_element( selector, selector_type)
             return element.is_displayed()
         except Exception as e:
-            logging.error(f'Failed to find or validate the element {ui_element_id}: {str(e)}')
+            logging.error(f'Failed to find or validate the element | {selector} | {selector_type} : {str(e)}')
             return False
 
     def get_attribute( self, selector: str, selector_type: str, attribute_name : str ) -> str :
@@ -23,11 +24,11 @@ class UIAction:
         return element.get_attribute( attribute_name )
         
     def get_xy(self, xy_value : str, direction : str ) ->List[int] :
-            set_value = ''
-            if not len(xy_value) > 0 :  
-                set_value = os.getenv(f'XY_DEFAULT_{direction}')
-            else : 
-                set_value = xy_value
+        set_value = ''
+        if not len(xy_value) > 0 :  
+            set_value = os.getenv(f'XY_DEFAULT_{direction}')
+        else : 
+            set_value = xy_value
         return [ int(item) for item in set_value.split(',') ]
 
     def perform_action(self, action : Dict[str, Any]) -> None:
@@ -36,7 +37,7 @@ class UIAction:
             self.click_element(action.get('selector'), action.get('selector_type'))
         elif action_type == 'type':
             
-            self.type_text(action.get('selector'), action.get('text'), action.get('selector_type'))
+            self.type_text(action.get('selector'), action.get('selector_type'), action.get('text'))
         elif action_type == 'swipe':
             list_nums = self.get_xy( action['xy_xy'], action['direction'] )
             self.driver.swipe(*list_nums, duration = 500 )
@@ -46,6 +47,8 @@ class UIAction:
         pass_next = False
         if len(action.get('selector')) > 0 :
             for i in range(0, int( action.get('max_retry') )) :
+                print(i)
+                time.sleep(1)
                 pass_next = self.confirm_ready( action.get('selector'), action.get('selector_type') )
                 if pass_next : break
                 if i == (int( action.get('max_retry') ) -1 ) : 
@@ -53,9 +56,11 @@ class UIAction:
                         raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
                     else :
                         pass
-        if len( action.get['subaction'].keys() ) > 0 :
-            self.iterate_action( action.get('subaction') , action )
-        else  : self.perform_action( action )        
+        if not bool( action.get('ignore') ) :
+            if len( action.setdefault('subaction', {}).keys() ) > 0 :
+                self.iterate_action( action.get('subaction') , action )
+            else  : self.perform_action( action )       
+        
 
 
     def click_element(self, selector: str, selector_type: str) -> None:

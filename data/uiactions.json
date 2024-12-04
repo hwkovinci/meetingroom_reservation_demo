@@ -28,7 +28,7 @@
                 "subaction" : {}
         },
         {"type" : "click",
-                "selector_type" : "xath",
+                "selector_type" : "xpath",
                 "selector" : "//android.widget.TextView[@content-desc=\"%REPLACE0%\"]",
                 "attribute_name" : "",
                 "text" : "",
@@ -44,7 +44,7 @@
         },
         {"type" : "click",
                 "selector_type" : "id",
-                "selector" : "com.android.permissioncontroller:id/permission_deny_button",
+                "selector" : "com.android.permissioncontroller:id/permission_deny_and_dont_ask_again_button",
                 "attribute_name" : "",
                 "text" : "",
                 "start_x" : "",
@@ -165,7 +165,7 @@
                 "max_retry" : "10",
                 "index" : 10,
                 "subaction" : {}
-        }
+        },
         {"type" : "swipe",
                 "selector_type" : "",
                 "selector" : "",
@@ -187,7 +187,7 @@
 
 
                 }
-        }
+        },
         {"type" : "click",
                 "selector_type" : "id",
                 "selector" : "com.etnersplatform.booki:id/btn_login_confirm",
@@ -211,7 +211,7 @@
 
 
                 }
-        }
+        },
         {"type" : "click",
                 "selector_type" : "id",
                 "selector" : "com.etnersplatform.booki:id/btn_login_confirm",

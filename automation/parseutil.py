@@ -6,7 +6,7 @@ from typing import Dict, List, Tuple
 load_dotenv()
 
 def load_config(file_path: str) -> List[dict]:
-    with open(file_path, 'r') as file:
+    with open(file_path, 'r', encoding = 'utf-8') as file:
         return json.load(file)
 
 def replace_with_index(str_target: str, pattern: str, replace_list : List[str] ) -> str:
@@ -39,15 +39,15 @@ def apply_userinput(actions: List[Dict[str, any]],
         action = actions[index]
         # Update the main action
         if len(updates[0]) > 0:
-            action_target : str, action_value : List[str] = updates[0].get('target'), updates[0].get('value')
+            action_target, action_value = updates[0].get('target'), updates[0].get('value')
             if action_target and action_value:
-                action[action_target] = replace_with_index( action[action_target] , os.getenv( 'REPLACE_PATTERN' ), *action_value )
+                action[action_target] = replace_with_index( action[action_target] , os.getenv( 'REPLACE_PATTERN' ), action_value )
         # Update the subaction, if any
         if len(updates[1]) > 0:
-            subaction_target : str, subaction_value : List[str] = updates[1].get('target'), updates[1].get('value')
+            subaction_target, subaction_value  = updates[1].get('target'), updates[1].get('value')
             if subaction_target and subaction_value:
                 current_str = action.setdefault('subaction', {})[subaction_target]
-                action.setdefault('subaction', {})[subaction_target] = replace_with_index( current_str, os.getenv( 'REPLACE_PATTERN' ), *subaction_value)
+                action.setdefault('subaction', {})[subaction_target] = replace_with_index( current_str, os.getenv( 'REPLACE_PATTERN' ), subaction_value)
   
 
     return actions
