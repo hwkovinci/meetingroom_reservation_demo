@@ -55,7 +55,7 @@ class UIAction:
                         raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
                     else :
                         pass
-        if not bool( action.get('ignore') ) :
+        if not bool( action.get('ignore') ) or pass_next :
             time.sleep(1)
             if len( action.setdefault('subaction', {}).keys() ) > 0 :
                 self.iterate_action( action.get('subaction') , action )
