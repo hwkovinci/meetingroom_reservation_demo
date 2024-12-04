@@ -72,7 +72,6 @@ class UIAction:
         selector = action.get['selector']
         selector_type = action.get('selector_type')
         condition = action.get('condition')
-        retry_count = 0
         for i in range(0, int( action.get('max_retry') )) :
             self.perform_action( main_action )
             time.sleep( 0.5 )
