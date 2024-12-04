@@ -37,12 +37,21 @@ class UIAction:
 
     def action_wrapper( self, action : Dict[str, Any] ) -> None :
 
-
-        if len( action.get['subaction'].keys() ) > 0 : 
-            self.iterate_action( action.get('subaction') , action )
-
+        retry_count = 0
+        while retry_count < int(action.get('max_retry')) :
+            self.confirm_ready( action.get()  )
+            retry_count += 1
+        if retry_count == int(action.get('max_retry')) :
+            if not bool( action.get('ignore') ) :
+                raise TimeoutError( f'Action Failed after given amount of retry ; {retry_count}' )
+            else :
+                pass
         else :
-            self.perform_action( action )
+            if len( action.get['subaction'].keys() ) > 0 :
+                self.iterate_action( action.get('subaction') , action )
+
+            else self.perform_action( action )
+
 
 
     def click_element(self, selector: str, selector_type: str) -> None:
