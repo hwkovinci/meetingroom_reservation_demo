@@ -15,6 +15,7 @@ def load_variables() -> Dict[int, Tuple[Dict[str, any], Dict[str, any]]] :
         2 : ({ 'target' : 'selector', 'value' : [ os.getenv('APP_NAME') ] }, {}),
         4 : ( { 'target' : 'selector', 'value' : [ os.getenv('USER_ID') ] }, {}),
         5 : ( { 'target' : 'selector', 'value' : [ os.getenv('USER_PW') ] }, {}),
+        8 : ( {}, {'target' : 'text' , 'value' : [start_time.strftime("%Y.%m.%d(%a)")] })
                    }
     return user_input
 
