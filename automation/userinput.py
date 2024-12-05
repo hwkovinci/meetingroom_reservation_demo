@@ -5,6 +5,11 @@ import os
 
 load_dotenv()
 
+def get_work_batch_list() -> List[Tuple[str, List[int]]]  :
+    lmd_split = lambda x: [int(i) for i in x.split(',')]
+    work_batch_list = [(os.getenv(f'WORK_BATCH_{i}_DESCRIPTION'), lmd_split(os.getenv(f'WORK_BATCH_{i}'))) for i in range(0, 100) if os.getenv(f'WORK_BATCH_{i}') is not None]
+    return work_batch_list
+
 def load_variables() -> Dict[int, Tuple[Dict[str, any], Dict[str, any]]] :
     start_time = datetime.strptime( os.getenv('START_TIME') , '%Y.%m.%d %H:%M:%S'  )
     end_time = datetime.strptime( os.getenv('END_TIME') , '%Y.%m.%d %H:%M:%S'  )
