@@ -5,6 +5,12 @@ from dotenv import load_dotenv
 from typing import Dict, List, Tuple
 load_dotenv()
 
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='app.log',  # Log to a file
+                    filemode='a')  # Append mode
+
 def load_config(file_path: str) -> List[dict]:
     with open(file_path, 'r', encoding = 'utf-8') as file:
         return json.load(file)
@@ -19,6 +25,11 @@ def replace_with_index(str_target: str, pattern: str, replace_list : List[str] )
       
     str_target = str_target.format( *replace_list )
     return str_target
+
+def execution_log(description: str, batch_index: int, total_batches: int):
+    # Visualizing current progress within the total batches
+    progress = ("█" * (batch_index + 1) + "-" * (total_batches - batch_index - 1))
+    logging.info(f"[{progress}] Batch {batch_index + 1}/{total_batches}: {description}")
 
 
 def apply_userinput(actions: List[Dict[str, any]], 
