@@ -10,6 +10,22 @@ import logging
 class UIAction:
     def __init__(self, driver: webdriver.Remote):
         self.driver = driver
+        
+    def make_decision(self, action : Dict[str, Any] ) -> Tuple[bool, int]:
+        result = self.perform_decision(action.get('decision_type') , action.setdefault('destination', ''), action.get('selector'), action.get('selector_type') )
+        
+        if result == 'stop':
+            return (True, 0)  # Stop the entire batches
+        elif result.isdigit():
+            return ( False, int(result))  # Move to specific batch index
+        return (False, None)  # Continue with the next batch
+
+    def perform_decision( decision_type : str, destination : str, selector : str, selector_type : str ) -> :
+        if decision_type == 'confirm_ready':
+            state_ready = self.confirm_ready( selector, selector_type )
+            return 'stop' if not state_ready else destination
+        else :
+            raise ValueError( f'Unsupported decision type  : {decision_type}' )
 
     def confirm_ready(self, selector: str, selector_type: str ) -> bool:
         try:
@@ -97,14 +113,4 @@ class UIAction:
             if i == (int( action.get('max_retry') ) -1 ) :
                 raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
 
-#    def swipe(self, start_x: int, start_y: int, end_x: int, end_y: int) -> None:
-#       TouchAction(self.driver).press(x=start_x, y=start_y).move_to(x=end_x, y=end_y).release().perform()
-
-#    def check_date_and_swipe(self, selector: str, target_date: datetime) -> None:
-#        # Sample implementation; adapt based on actual app behavior
-#        current_date = datetime.now()
-#        while current_date < target_date:
-#            # Assume swiping left brings future dates
-#            self.swipe(100, 500, 500, 500)  # Modify coordinates as needed
-#            current_date += timedelta(days=1)
 
