@@ -6,6 +6,11 @@ from typing import Dict, List, Any
 import time
 import logging
 
+logging.basicConfig(level=logging.WARNING,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    datefmt='%Y-%m-%d %H:%M:%S',
+                    filename='app.log',  # Log to a file
+                    filemode='a')  # Append mode
 
 class UIAction:
     def __init__(self, driver: webdriver.Remote):
@@ -32,7 +37,7 @@ class UIAction:
             element = self.find_element( selector, selector_type)
             return element.is_displayed()
         except Exception as e:
-            logging.error(f'Failed to find or validate the element |---{selector}---|---{selector_type}---|---{str(e)}')
+            logging.warning(f'Failed to find or validate the element |---{selector}---|---{selector_type}---|---{str(e)}')
             return False
 
     def get_attribute( self, selector: str, selector_type: str, attribute_name : str ) -> str :
