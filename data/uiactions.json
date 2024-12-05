@@ -249,7 +249,7 @@
                 "max_retry" : "10",
                 "index" : 15,
                 "subaction" : {}
-        }    
+        },    
         {"type" : "swipe",
                 "selector_type" : "",
                 "selector" : "",
@@ -329,7 +329,7 @@
                 "max_retry" : "10",
                 "index" : 20,
                 "subaction" : {}
-        }    
+        },    
         {"type" : "swipe",
                 "selector_type" : "",
                 "selector" : "",
