@@ -51,7 +51,9 @@ com.etnersplatform.booki:id/btn_login_confirm
 
 ## Click (ID)
 com.etnersplatform.booki:id/bottom_nav_usage
-# While 
+
+
+# While INDEX8
 ### (ID) com.etnersplatform.booki:id/tvDateToday
   Get Attribute , Text
   #### =! 
@@ -59,30 +61,31 @@ com.etnersplatform.booki:id/bottom_nav_usage
 in_datetime_start.strftime("%Y.%m.%d(%a)")
 ```
   => Click (ID) com.etnersplatform.booki:id/right
-## Element Exist (Xpath)
+
+## Element Exist (Xpath) INDEX9
 ```python
 f'//android.widget.TextView[@resource-id="com.etnersplatform.booki:id/tv_Time" and @text="{in_datetime_start.strftime("%Y.%m.%d(%a)} {in_datetime_start.strftime("%H:%M")} ~ {in_datetime_end.strftime("%H:%M")}"]'
 ```
 ## return bool
 
 
-## Click (ID)
+## Click (ID) INDEX10
 com.etnersplatform.booki:id/bottom_nav_info
 
-## While 
+## While   INDEX11
 ### (ID) com.etnersplatform.booki:id/tvName 
   Get Attribute , Text 
   #### =! 302
   => Scroll Down
 
-## Click (ID)
+## Click (ID) INDEX12
 com.etnersplatform.booki:id/button
 
 
-## Click (ID)
+## Click (ID) INDEX13
 com.etnersplatform.booki:id/tvSelectDate
 
-## While 
+## While INDEX14
 ### (XPATH) 
 ```python
 f'''//android.view.View[@content-desc="{in_datetime_start.strftime('%d %B %Y')}"]'''
@@ -90,7 +93,7 @@ f'''//android.view.View[@content-desc="{in_datetime_start.strftime('%d %B %Y')}"
   #### Element Exist =! false
 => Click (ID) android:id/next
 
-## Click (ID)
+## Click (ID) INDEX15
 com.etnersplatform.booki:id/tvStartTime
 
 ## Assign
@@ -98,7 +101,7 @@ com.etnersplatform.booki:id/tvStartTime
 int_diff =  datetime.now().hour - in_datetime_start.hour
 "up" if int_diff > 0 else "down"
 ```
-## IF 
+## IF  INDEX16
 ```python
 in_datetime_start.strftime('%p') =! datetime.now().strftime('%p')
 ```
@@ -107,7 +110,7 @@ in_datetime_start.strftime('%p') =! datetime.now().strftime('%p')
 f'("up" if int_diff > 0 else "down")' 
 ``` 
 
-## While 
+## While INDEX17
 ### (XPATH) 
 ```python
 f'''//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @text="{in_datetime_start.strftime('%I')}"]'''
@@ -116,7 +119,7 @@ f'''//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @
 => Scroll down
 
 
-## While 
+## While INDEX18
 ### (XPATH) 
 ```python
 f'''//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @text="{in_datetime_start.strftime('%M')}"]'''
@@ -125,45 +128,7 @@ f'''//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @
 => Scroll down
 
 
-## Click (ID)
-com.etnersplatform.booki:id/tvStartTime
-
-## Assign
-```python
-int_diff =  datetime.now().hour - in_datetime_start.hour
-```
-## IF 
-```python
-in_datetime_start.strftime('%p') =! datetime.now().strftime('%p')
-```
-=> Scroll 
-```python
-f'("up" if int_diff > 0 else "down")' 
-``` 
-
-## While 
-### (XPATH) 
-```python
-f'''//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @text="{in_datetime_start.strftime('%I')}"]'''
-```
-  #### Element Exist =! false
-=> Scroll down
-
-
-## While 
-### (XPATH) 
-```python
-f'''//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @text="{in_datetime_start.strftime('%M')}"]'''
-```
-  #### Element Exist =! false
-=> Scroll down
-
-## Click (ID)
-com.etnersplatform.booki:id/btn_ok
-
-
-
-## Click (ID)
+## Click (ID) INDEX19
 com.etnersplatform.booki:id/tvEndTime
 
 ## Assign
@@ -196,22 +161,22 @@ f'''//android.widget.EditText[@resource-id="android:id/numberpicker_input" and @
   #### Element Exist =! false
 => Scroll down
 
-## Click (ID)
+## Click (ID) INDEX24
 com.etnersplatform.booki:id/btn_ok
 
 
-## While 
+## While INDEX25
 ### (ID) 	com.etnersplatform.booki:id/btnOk
   #### Element Exist =! false
 => Scroll down
 
-## Type (ID) 
+## Type (ID) INDEX26
 com.etnersplatform.booki:id/etTitle
 
-## Type (ID) 
+## Type (ID) INDEX27
 com.etnersplatform.booki:id/etMessage
 
-### Click (ID) 	
+### Click (ID) 	INDEX28
 com.etnersplatform.booki:id/btnOk
 
 
