@@ -26,9 +26,13 @@ class UIAction:
         return (False, None)  # Continue with the next batch
 
     def perform_decision( decision_type : str, destination : str, selector : str, selector_type : str ) -> :
-        if decision_type == 'confirm_ready':
+        if decision_type == 'stop_if_ready':
             state_ready = self.confirm_ready( selector, selector_type )
             return 'stop' if not state_ready else destination
+        if decision_type == 'start_if_ready':
+            state_ready = self.confirm_ready( selector, selector_type )
+            return 'stop' if not state_ready else destination  
+          
         else :
             raise ValueError( f'Unsupported decision type  : {decision_type}' )
 
