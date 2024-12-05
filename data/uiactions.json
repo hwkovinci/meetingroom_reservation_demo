@@ -150,6 +150,9 @@
                 "ignore" : false,
                 "max_retry" : "10",
                 "index" : 9,
+                "" : "",
+                "decision_type":"stop_if_ready",
+                "destination" : "",
                 "subaction" : {}
         },
         {"type" : "",
