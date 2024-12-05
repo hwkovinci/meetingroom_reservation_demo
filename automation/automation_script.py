@@ -30,8 +30,6 @@ def run_automation(args : Namespace) -> None:
     
     # Iterate through each action in the JSON configuration
     
-    for action in actions:
-        ui_actions.action_wrapper(action)
     state_changed = False
     move_to = 0
     for enum, item in enumerate( work_batch_list ) :
