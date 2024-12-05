@@ -3,6 +3,7 @@ import re
 import os
 from dotenv import load_dotenv
 from typing import Dict, List, Tuple
+import logging
 load_dotenv()
 
 logging.basicConfig(level=logging.INFO,

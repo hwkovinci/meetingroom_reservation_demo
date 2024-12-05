@@ -39,32 +39,34 @@ def run_automation(args : Namespace) -> None:
     state_changed = False
     move_to = 0
     for enum, item in enumerate( work_batch_list ) :
-        if state_changed :
-            if move_to != enum :
-                continue
-        execution_log( description, enum, len( work_batch_list ) )
+        if state_changed and enum < move_to : continue
 
         description, batch = item
+        execution_log( description, enum, len( work_batch_list ) )
         print(description)
         for action_index, i in enumerate(batch):
-            logging.info(f"  - Action {action_index + 1} of {len(batch)}: {actions[i].setdefault('description', 'no comment')} executed")
+            print(f"  - Action {action_index + 1} of {len(batch)}: {actions[i].setdefault('description', 'no comment')} executed")
             ui_actions.action_wrapper(actions[i])
         decision_index = batch[-1] + 1
-        stop, next_batch_index = ui_actions.make_decision(decision_index, actions)
+        if decision_index == len(actions):
+            print(f"↳ End of Process - Goodbye")
+            continue
+
+        stop, next_batch_index = ui_actions.make_decision( actions[decision_index] )
         if not stop :
             if next_batch_index is not None:
                 # Jump to specific batch index
                 state_changed = True
                 move_to = next_batch_index
-                logging.info(f"↳ Jumping to Batch {next_batch_index}")
+                print(f"↳ Jumping to Batch {next_batch_index}")
                 continue
             else:
                 # Skip the next batch
                 state_changed = False
-                logging.info("↳ Moving to next batch")
+                print("↳ Moving to next batch")
                 continue
         else :
-            logging.info("Batch execution stopped")
+            print("Batch execution stopped")
             break
 
     driver.quit()

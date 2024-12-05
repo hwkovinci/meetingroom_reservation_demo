@@ -39,7 +39,7 @@ python3 scripts/automation_runner.py --script-path "$AUTOMATION_SCRIPT" --uiacti
 python3 scripts/appium_server.py stop
 
 # Close Emulator
-python3 scripts/emulator.py close
+python3 scripts/emulator.py close --avd-name "$AVD_NAME"
 
 # Deactivate the virtual environment
 deactivate

@@ -2,9 +2,10 @@ from appium import webdriver
 from appium.webdriver.common.appiumby import AppiumBy
 #from appium.webdriver.common.touch_action import TouchAction
 from datetime import datetime, timedelta
-from typing import Dict, List, Any
+from typing import Dict, List, Tuple, Any
 import time
 import logging
+import os
 
 logging.basicConfig(level=logging.WARNING,
                     format='%(asctime)s - %(levelname)s - %(message)s',
@@ -21,19 +22,21 @@ class UIAction:
         
         if result == 'stop':
             return (True, 0)  # Stop the entire batches
+        elif result == 'next' :
+            return ( False, None )
         elif result.isdigit():
-            return ( False, int(result))  # Move to specific batch index
-        return (False, None)  # Continue with the next batch
+            return ( False, int(result)) # Move to specific batch index
+        else : return ( False, None )
+    
 
-    def perform_decision( decision_type : str, destination : str, selector : str, selector_type : str ) -> :
+    def perform_decision( self, decision_type : str, destination : str, selector : str, selector_type : str ) -> str :
+        state_ready = self.confirm_ready( selector, selector_type )
         if decision_type == 'stop_if_ready':
-          """if element exist stop process """
-            state_ready = self.confirm_ready( selector, selector_type )
+            """if element exist stop process """
             return 'stop' if state_ready else destination
         if decision_type == 'start_if_ready':
-          """if element exist proceed to the next process """
-            state_ready = self.confirm_ready( selector, selector_type )
-            return 'stop' if not state_ready else destination
+            """if element exist proceed to the next process """
+            return destination if state_ready else 'next'
           
         else :
             raise ValueError( f'Unsupported decision type  : {decision_type}' )
@@ -47,7 +50,7 @@ class UIAction:
             return False
 
     def get_attribute( self, selector: str, selector_type: str, attribute_name : str ) -> str :
-        element = self.find_element(se)
+        element = self.find_element(selector, selector_type)
         return element.get_attribute( attribute_name )
         
     def get_xy(self, xy_value : str, direction : str ) ->List[int] :
@@ -66,7 +69,7 @@ class UIAction:
             
             self.type_text(action.get('selector'), action.get('selector_type'), action.get('text'))
         elif action_type == 'swipe':
-            list_nums = self.get_xy( action['xy_xy'], action['direction'] )
+            list_nums = self.get_xy( action.get('xy_xy'), action.get('direction') )
             self.driver.swipe(*list_nums, duration = 500 )
 
 
@@ -85,7 +88,7 @@ class UIAction:
         if not bool( action.get('ignore') ) or pass_next :
             time.sleep(1)
             if len( action.setdefault('subaction', {}).keys() ) > 0 :
-                self.iterate_action( action.get('subaction') , action )
+                self.iterate_action( action.setdefault('subaction', {}) , action )
             else  : self.perform_action( action )       
         
 
@@ -109,19 +112,20 @@ class UIAction:
 
     def iterate_action( self , action : Dict[ str, Any], main_action : Dict[ str, Any ] ) -> None :
         meet_condition = False
-        selector = action.get['selector']
-        selector_type = action.get('selector_type')
-        condition = action.get('condition')
-        for i in range(0, int( action.get('max_retry') )) :
+        selector = action.setdefault('selector', '' )  
+        selector_type = action.setdefault('selector_type', '' )
+        condition = action.setdefault('condition', '')
+        for i in range(0, int( action.setdefault('max_retry', '10') )) :
             self.perform_action( main_action )
             time.sleep( 1 )
             if condition == 'get_attribute' :
-                attribute_value = self.get_attribute( selector, selector_type, action.get( 'attribute_name' ))
-                meet_condition =  attribute_value is action.get( 'text' )
+                attribute_value = self.get_attribute( selector, selector_type, action.setdefault( 'attribute_name', ''))
+                print( f'compare ---{attribute_value}--- with ----{action.setdefault("text", '')}----'  )
+                meet_condition =  ( attribute_value ==  action.setdefault( 'text', '' ) )
             elif condition == 'confirm_ready' :
                 meet_condition = self.confirm_ready( selector, selector_type)
             if meet_condition : break
-            if i == (int( action.get('max_retry') ) -1 ) :
-                raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
+            if i == (int( action.setdefault('max_retry', '10') ) -1 ) :
+                raise TimeoutError( f"Action Failed after given amount of retry ; {action.setdefault('max_retry', '10')}" )
 
 

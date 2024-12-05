@@ -1,269 +1,142 @@
-# 📱 Android UI Automation Project with Python and Appium 🚀
+# 안드로이드 어플리케이션 자동화 
 
-Welcome to the **Android UI Automation Project**! This project allows you to automate interactions with an Android application using Python 🐍 and Appium 🤖. You’ll run your automation scripts on a desktop environment using an Android Virtual Device (AVD) emulator.
+## Table of Contents 
 
---
+- 1. [개발 개요 및 배경](#개발-개요-및-배경-)
+- 2. [흐름 개요](#흐름-개요-)
+- 3. [특이사항](#특이사항-)
+- 4. [환경설정](#환경설정-)
+- 5. [오류이력](#오류이력-)
+- 6. [개발 및 수정이력](#개발-및-수정이력-)
 
-## Table of Contents 📖
+## 1. 개발 개요 및 배경
+### 적용 효과
+- 데스크탑 버전이 지원이 되지 않는 모바일 어플리케이션내에서의 반복적인 업무를 자동화 할 수 있습니다. 
 
-- [Introduction 🌟](#introduction-)
-- [Features ✨](#Features-)
-- [Prerequisites 📋](#Prerequisites-)
-- [System Setup Guidelines 🛠️](#System-Setup-Guidelines-)
-- [Install Java Development Kit (JDK) ☕](#Install-Java-Development-Kit-(JDK)-)
-- [Install Android SDK 📲](#Install-Android-SDK-)
-- [Create an Android Virtual Device (AVD) 📱](#Create-an-Android-Virtual-Device-(AVD)-)
-- [Install Appium and Dependencies 🤖](#Install-Appium-and-Dependencies-)
-- [Project Structure 📂](#Project-Structure-)
-- [Usage 🚴](#Usage-)
-- [Additional Information ℹ️](#Additional-Information-)
-- [Contributing 🤝](#Contributing-)
-- [License 📄](#License-)
+### 수혜 대상
+- 데스크탑 버전이 지원이 되지 않는 모바일 어플리케이션을 자동화하고자 하는 경우
+- 사용중인 스마트폰의 제조사가 더 이상 os 업데이트를 지원하지 않는 경우
+- 사용하고자 하는 모바일 어플리케이션이 일정버전 이상의 os를 요하는 경우
+  
+### 제약 사항 : 
+#### 운영체제별로 다음과 같은 하드웨어 요구조건이 발생할 수 있습니다. 
+- Windows: Enable Intel HAXM during Android SDK installation.
+- macOS: Hardware acceleration is enabled by default.
+- Linux: Use KVM for hardware acceleration.
 
-	
-## Introduction 🌟
+#### 생체정보를 통해서만 엑세스가 허용되는 어플리케이션의 경우 이용에 제한이 있을 수 있습니다.  
 
-This project automates Android application interactions by:
-- Running automation scripts on a desktop using an Android emulator.
-- Installing the target APK into the emulator.
-- Executing automation scripts using Appium.
-- Automating the entire workflow with shell scripts and Python scripts.
-
-## Features ✨
-- Cross-Platform Support: Works on Windows, macOS, and Linux 🖥️
-- Modular Design: Clean separation between components for maintainability 🛠️
-- Automation with Appium: Utilize Appium for robust UI automation 🤖
-- Scripted Workflow: Shell and Python scripts orchestrate the entire process 📜
-
-
-## Prerequisites 📋
-- Python 3.x installed on your desktop 🐍
-- ode.js installed (for Appium server) 📦
-- Git installed (optional, for cloning the repository) 🌐
-
-
-## System Setup Guidelines 🛠️
-
-### Install Java Development Kit (JDK) ☕
-
-#### **For Windows**:
-1. Download JDK:
-- Visit Oracle JDK Downloads or OpenJDK.
-2. Install JDK:
-- Run the installer and follow the instructions.
-- By default, JDK is installed in C:\Program Files\Java\jdk-<version>.
-3. Set JAVA_HOME Environment Variable:
-- Go to Control Panel > System > Advanced system settings.
-- Click Environment Variables.
-- Under System Variables, click New.
-- Variable name: JAVA_HOME
-- Variable value: C:\Program Files\Java\jdk-<version>
-- Click OK.
-4. Update PATH Variable:
-- In System Variables, select Path and click Edit.
-- Add %JAVA_HOME%\bin to the list.
-- Click OK.
-
-#### **For macOS**:
-1. Download and Install JDK:
-2. Set JAVA_HOME Environment Variable:
-3. Download and Install JDK:
-- Visit Oracle JDK Downloads.
-- Download the macOS installer and run it.
-4. Set JAVA_HOME Environment Variable:
-- Open Terminal.
-- Run:
-
+## 2. 흐름 개요
 ```shell
-echo 'export JAVA_HOME=$(/usr/libexec/java_home)' >> ~/.bash_profile
-source ~/.bash_profile
+[Client Script]
+    |        |
+    |        |---[Initialize Driver]
+    |                 | (Desired Capabilities)
+    |        |---[Load Actions (JSON)]
+    |
+    |------------------> [Appium Server]
+                            |          |
+                            |          |---[Translate Commands]
+                            |                    | (to Mobile Commands)
+                            |          |---[Communicate with Device]
+                            |
+                            |------------------> [Mobile Device]
+                                                 |       |
+                                                 |       |---[Execute Actions on App]
+                                                 |       |      | (UI Interactions)
+                                                 |       |---[Send Response]
+                                                 |
+                                                 |<------------------|
+                                                 |
+                            |<------------------|
+                            |          |
+                            |          |---[Process Responses]
+                            |
+    |<------------------|
+    |        |
+    |        |---[Handle Results]
+    |        |---[Adjustments/Reiterations]
+    |
+    |---[End/Quit Driver]
+
+```
+## 3. 특이사항
+
+|index|주요문제|조치사항|
+|---|---|---|
+|0|libpulse.so.0:cannot open shared object file : cannot open shared object file :No such file or directory| PulseAudio package 설치 : (4. 환경설정-Linux (Ubuntu 22.04.5 LTS 기준)-[필요 패키지 설치](#필요-패키지-설치-)) 참조|
+|1|This user doesn't have permissions to use KVM| 사용자 kvm 권한 부여 : (4. 환경설정-Linux (Ubuntu 22.04.5 LTS 기준)-[필요 패키지 설치](#필요-패키지-설치-)) 참조|
+|2|윈도우 nodejs 에서 appium 설치 불가|4. 환경설정-Windows-4. [Appium Server GUI 설치](#Appium-Server-GUI-설치-) 참조|
+
+
+## 4. 환경설정
+
+### Windows
+1. 구글 공식홈페이지에서 Android Sdk Studio 다운로드 (https://developer.android.com/studio)
+2. Java jdk 설치
+3. JAVA_HOME 사용자 환경 변수 설정
+4. Appium Server GUI 설치 ( https://github.com/appium/appium-desktop/releases/tag/v1.22.3-4 )
+5. Appium Inspector 설치 (선택사항, https://github.com/appium/appium-inspector/releases)
+6. Android Sdk Studio 에서 다음 안내에 따라 command-line-tool 설치
+
+Note: The Android SDK Command-Line Tools package, located in cmdline-tools, replaces the SDK Tools package, located in tools. With the new package, you can select the version of the command line tools you want to install, and you can install multiple versions at a time. With the old package, you can only install the latest version of the tools. Thus, the new package lets you depend on specific versions of the command-line tools without having your code break when new versions are released. For information about the deprecated SDK Tools package, see the SDK Tools release notes.
+
+Source : https://developer.android.com/tools
+
+8. powershell 실행
+```powershell
+C:\Users\YOURDOMAIN\AppData\Local\Android\Sdk\cmdline-tools/version/bin/sdkmanager.exe "system-images;android-35;google_apis_playstore;x86_64"
+C:\Users\YOURDOMAIN\AppData\Local\Android\Sdk\cmdline-tools/version/bin/avdmanager.exe create avd -n YOUR_AVD_NAME -k "system-images;android-35;google_apis_playstore;x86_64" --device "pixel"
 ```
 
-#### **For Linux**:
-1. Install OpenJDK:
-##### Ubuntu/Debian:
+### macOS
+준비중
+
+### Linux (Ubuntu 22.04.5 LTS 기준)
+
+#### 필요 패키지 설치
 ```shell
 sudo apt update
-sudo apt install -y openjdk-11-jdk
-```
-##### CentOS/Fedora:
-```shell
-sudo yum install -y java-11-openjdk-devel
-```
-2. Set JAVA_HOME Environment Variable:
-- Add to ~/.bashrc or ~/.bash_profile:
-```shell
-export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which javac))))
-export PATH=$PATH:$JAVA_HOME/bin
-```
-- Reload the profile:
-```shell
-source ~/.bashrc
-```
-
-
-### Install Android SDK 📲
-
-Note: We’ll install the Command Line Tools instead of the full Android Studio.
-
-#### For All Platforms:
-1. Download Command Line Tools:
-- Visit Android Studio Downloads.
-- Scroll down to Command line tools only.
-- Download the appropriate package for your OS.
-2. Install SDK Command Line Tools:
-- Extract the Zip File:
-- Windows: Use an unzip tool to extract to C:\Android\cmdline-tools.
-- macOS/Linux:
-
-```shell
-mkdir -p ~/Android/Sdk/cmdline-tools
-unzip commandlinetools-*.zip -d ~/Android/Sdk/cmdline-tools
-```
-3. Set ANDROID_SDK_ROOT Environment Variable:
-- Windows:
-##### Variable name: ANDROID_SDK_ROOT
-##### Variable value: C:\Android
-- macOS/Linux:
-```shell
-echo 'export ANDROID_SDK_ROOT=~/Android/Sdk' >> ~/.bash_profile
-echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin' >> ~/.bash_profile
-echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools' >> ~/.bash_profile
-source ~/.bash_profile
-```
-4. Install Required SDK Packages:
-- Accept Licenses:
-```shell
-sdkmanager --sdk_root=$ANDROID_SDK_ROOT --licenses
-```
-- Install Packages:
-```shell
-sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-35" "system-images;android-35;google_apis_playstore;x86_64" "emulator"
-```
-
-### Create an Android Virtual Device (AVD) 📱
-
-**For All Platforms**:
-1. List Available System Images:
-```shell
-sdkmanager --list | grep "system-images"
-```
-
-2. Create an AVD:
-```shell
-avdmanager create avd -n my_avd -k "system-images;android-30;google_apis;x86_64" --device "pixel"
-```
-#### -n my_avd: Names the AVD as “my_avd”.
-#### -k: Specifies the system image to use.
-#### --device "pixel": Uses a predefined device configuration.
-
-### Install Appium and Dependencies 🤖
-
-**For All Platforms**:
-1. Install Node.js:
-#### Windows:
-- Download the Windows Installer from Node.js Downloads.
-- Run the installer.
-
-#### macOS:
-```shell
-brew install node
-```
-
-#### Linux:
-```shell
-sudo apt update
+sudo apt install unzip
+sudo apt install default-jdk
 sudo apt install -y nodejs npm
-```
-2. Install Appium Server:
-```shell
 npm install -g appium
+
+
+echo 'export JAVA_HOME=/usr/lib/jvm/default-jdk'>>~/.bashrc
+echo 'export PATH=$PATH:$JAVA_HOME/bin'>>~/.bashrc
+
+echo 'export ANDROID_SDK_ROOT=~/Android/Sdk'>>~/.bashrc
+echo 'export ANDROID_HOME=~Android'>>~/.bashrc 
+
+source ~/.bashrc
+
+curl -L "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -o $ANDROID_SDK_ROOT/cmdl.zip
+unzip $ANDROID_SDK_ROOT/cmdl.zip -d $ANDROID_SDK_ROOT
+
+
+sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-35" "system-images;android-35;google_apis_playstore;x86_64" "emulator"
+
+mv $ANDROID_SDK_ROOT/platform-tools $ANDROID_HOME/platform-tools
+mv $ANDROID_SDK_ROOT/platforms $ANDROID_HOME/platforms
+mv $ANDROID_SDK_ROOT/system-images $ANDROID_HOME/system-images
+mv $ANDROID_SDK_ROOT/emulator $ANDROID_HOME/emulator 
+
+avdmanager create avd -n YOUR_AVD_NAME -k "system-images;android-35;google_apis_playstore;x86_64" --device "pixel"
+
+sudo apt-get install pulseaudio
+
 ```
-3. Install Appium Python Client:
-```shell
-pip install Appium-Python-Client
-```
-## Project Structure 📂
-```shell
-automation_project/
-├── scripts/
-│   ├── __init__.py
-│   ├── emulator.py
-│   ├── apk_installer.py
-│   ├── appium_server.py
-│   └── automation_runner.py
-├── automation/
-│   └── automation_script.py
-├── data/
-│   └── quickbootChoice.ini
-├── workflow.sh
-├── requirements.txt
-├── config.ini
-└── README.md
-```
-#### scripts/: Contains Python modules for each task.
-#### automation/: Contains the main automation script.
-#### data/: Contains .ini file for Booting an emulator via command-line
-#### workflow.sh: Shell script to orchestrate the workflow.
-#### requirements.txt: Python dependencies.
-#### config.ini: additionally required variables
-#### README.md: Project documentation (this file).
 
-## Usage 🚴
-
-1. Clone the Repository
-```shell
-git clone https://github.com/yourusername/automation_project.git
-cd automation_project
-```
-2. Install Python Dependencies
-```shell
-pip install -r requirements.txt
-```
-3. Configure the Project
-- Update workflow.sh with the correct paths and configurations.
-- Modify automation/automation_script.py to suit your automation needs.
-
-4. Make Scripts Executable
-```shell
-chmod +x scripts/*.py
-chmod +x automation/automation_script.py
-chmod +x workflow.sh
-```
-5. Run the Workflow
-```shell
-./workflow.sh --username your_username --password your_password --app-package com.example.app --app-activity .MainActivity
-```
-## Additional Information ℹ️
-
-- Emulator Performance:
-1. For better performance, ensure your system supports hardware acceleration:
-2. Windows: Enable Intel HAXM during Android SDK installation.
-3. macOS: Hardware acceleration is enabled by default.
-4. Linux: Use KVM for hardware acceleration.
-
-- Appium Server Logs:
-1. Logs are stored in appium.log.
-2. Adjust logging configurations in scripts/appium_server.py if needed.
-	
-- Automation Script:
-1. The automation script uses argparse for command-line arguments.
-2. Customize automation/automation_script.py with your automation steps.
-
-## Contributing 🤝
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
-1. Fork the repository 🍴
-2. Create your feature branch (git checkout -b feature/AmazingFeature) 🌟
-3. Commit your changes (git commit -m 'Add some AmazingFeature') 🖋️
-4. Push to the branch (git push origin feature/AmazingFeature) 🚀
-5. Open a pull request 📬
+## 오류이력
+|날짜|진행내용|담당자|비고|
+|---|---|---|---|
+|yyyy.MM.dd|undefined|undefined|undefined|
 
 
-## License 📄
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## 개발 및 수정이력
+|날짜|진행내용|담당자|비고|
+|---|---|---|---|
+|yyyy.MM.dd|undefined|undefined|undefined|
 
-Happy Automating! 🎉🚀
-
-**Disclaimer**: Ensure you have the rights and permissions to automate the application you’re testing. Always comply with software licenses, terms of service, and applicable laws. ⚠️

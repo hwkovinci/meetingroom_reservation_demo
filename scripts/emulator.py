@@ -38,7 +38,7 @@ def start_emulator( args : Namespace ) -> None:
             time.sleep(5)
     print("Emulator started.")
 
-def close_emulator() -> None:
+def close_emulator( args : Namespace ) -> None:
     print("Closing emulator...")
     subprocess.run(["adb", "emu", "kill"])
     subprocess.run(["avdmanager",
@@ -60,13 +60,14 @@ def main() -> NoReturn:
 
     # Close emulator
     parser_close = subparsers.add_parser('close', help='Close the emulator')
+    parser_close.add_argument('--avd-name', required=True, help='Name of the AVD to delete')
 
     args = parser.parse_args()
 
     if args.command == 'start':
-        start_emulator(args)
+        start_emulator( args )
     elif args.command == 'close':
-        close_emulator()
+        close_emulator( args )
     else:
         parser.print_help()
         sys.exit(1)
