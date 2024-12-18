@@ -107,7 +107,7 @@ echo 'export JAVA_HOME=/usr/lib/jvm/default-jdk'>>~/.bashrc
 echo 'export PATH=$PATH:$JAVA_HOME/bin'>>~/.bashrc
 
 echo 'export ANDROID_SDK_ROOT=~/Android/Sdk'>>~/.bashrc
-echo 'export ANDROID_HOME=~Android'>>~/.bashrc 
+echo 'export ANDROID_HOME=~/Android'>>~/.bashrc 
 
 source ~/.bashrc
 
