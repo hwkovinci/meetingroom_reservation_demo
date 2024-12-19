@@ -108,8 +108,8 @@ sudo apt install unzip
 sudo apt install openjdk-17-jdk openjdk-17-jre
 sudo apt install -y nodejs npm
 sudo npm install -g appium
-sudo apt-get install python3-virtualenv
-sudo apt-get install python-pip 
+sudo apt install python3.10-venv
+sudo apt install python3-pip
 
 echo 'export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64'>>~/.bashrc
 echo 'export PATH=$PATH:$JAVA_HOME/bin'>>~/.bashrc
