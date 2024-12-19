@@ -121,7 +121,7 @@ class UIAction:
             time.sleep( 1 )
             if condition == 'get_attribute' :
                 attribute_value = self.get_attribute( selector, selector_type, action.setdefault( 'attribute_name', ''))
-                print( f'compare ---{attribute_value}--- with ----{action.setdefault("text", '')}----'  )
+                print( f'compare ---{attribute_value}--- with ----{action.setdefault("text", "")}----'  )
                 meet_condition =  ( attribute_value ==  action.setdefault( 'text', '' ) )
             elif condition == 'confirm_ready' :
                 meet_condition = self.confirm_ready( selector, selector_type)
