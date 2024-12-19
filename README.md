@@ -108,6 +108,8 @@ sudo apt install unzip
 sudo apt install openjdk-17-jdk openjdk-17-jre
 sudo apt install -y nodejs npm
 sudo npm install -g appium
+appium driver install uiautomator2
+
 sudo apt install python3.10-venv
 sudo apt install python3-pip
 
