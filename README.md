@@ -96,35 +96,40 @@ C:\Users\YOURDOMAIN\AppData\Local\Android\Sdk\cmdline-tools/version/bin/avdmanag
 
 #### 필요 패키지 설치
 ```shell
-sudo apt update
+
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt-get install cpu-checker
+sudo apt-get install qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
+sudo adduser $USER kvm
+
 sudo apt install unzip
-sudo apt install default-jdk
+sudo apt install openjdk-17-jdk openjdk-17-jre
 sudo apt install -y nodejs npm
-npm install -g appium
+sudo npm install -g appium
+sudo apt-get install python3-virtualenv
+sudo apt-get install python-pip 
 
-
-echo 'export JAVA_HOME=/usr/lib/jvm/default-jdk'>>~/.bashrc
+echo 'export JAVA_HOME=/usr/lib/jvm/java-1.17.0-openjdk-amd64'>>~/.bashrc
 echo 'export PATH=$PATH:$JAVA_HOME/bin'>>~/.bashrc
 
 echo 'export ANDROID_SDK_ROOT=~/Android/Sdk'>>~/.bashrc
-echo 'export ANDROID_HOME=~/Android'>>~/.bashrc 
-
+echo 'export ANDROID_HOME=~/Android'>>~/.bashrc
+echo 'export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/bin'>>~/.bashrc
+echo 'export PATH=$PATH:$ANDROID_HOME/platform-tools'>>~/.bashrc 
 source ~/.bashrc
 
+mkdir -p $ANDROID_SDK_ROOT
 curl -L "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -o $ANDROID_SDK_ROOT/cmdl.zip
 unzip $ANDROID_SDK_ROOT/cmdl.zip -d $ANDROID_SDK_ROOT
 
-
-sdkmanager --sdk_root=$ANDROID_SDK_ROOT "platform-tools" "platforms;android-35" "system-images;android-35;google_apis_playstore;x86_64" "emulator"
-
-mv $ANDROID_SDK_ROOT/platform-tools $ANDROID_HOME/platform-tools
-mv $ANDROID_SDK_ROOT/platforms $ANDROID_HOME/platforms
-mv $ANDROID_SDK_ROOT/system-images $ANDROID_HOME/system-images
-mv $ANDROID_SDK_ROOT/emulator $ANDROID_HOME/emulator 
+sdkmanager --sdk_root=$ANDROID_HOME "platform-tools" "platforms;android-35" "system-images;android-35;google_apis_playstore;x86_64" "emulator"
 
 avdmanager create avd -n YOUR_AVD_NAME -k "system-images;android-35;google_apis_playstore;x86_64" --device "pixel"
 
 sudo apt-get install pulseaudio
+
 
 ```
 
