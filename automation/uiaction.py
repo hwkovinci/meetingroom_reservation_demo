@@ -82,7 +82,8 @@ class UIAction:
                 if pass_next : break
                 if i == (int( action.get('max_retry') ) -1 ) : 
                     if not bool( action.get('ignore') ) :
-                        raise TimeoutError( f'Action Failed after given amount of retry ; {action.get('max_retry')}' )
+                      raise TimeoutError( f"Action Failed after given amount of retry ; {action.setdefault('max_retry', '10')}" )
+                        
                     else :
                         pass
         if not bool( action.get('ignore') ) or pass_next :
